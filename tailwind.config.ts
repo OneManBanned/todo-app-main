@@ -10,10 +10,10 @@ const config: Config = {
   theme: {
     extend: {
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+                'light-bimg': "url(/images/bg-desktop-light.jpg)",
+                'dark-bimg': "url(/images/bg-desktop-dark.jpg)",
       },
+
     },
   },
   plugins: [],
