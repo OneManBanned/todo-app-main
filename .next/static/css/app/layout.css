@@ -521,8 +521,11 @@ video {
   --tw-border-opacity: 1;
   border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
-.bg-light-bimg {
-  background-image: url(/images/bg-desktop-light.jpg);
+.bg-light-mb-bimg {
+  background-image: url(/images/bg-mobile-light.jpg);
+}
+.bg-no-repeat {
+  background-repeat: no-repeat;
 }
 
 :root {
@@ -545,5 +548,20 @@ body {
     /* linear-gradient(to bottom,
       transparent,
       rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb)); */
+}
+
+:is(.dark .dark\:bg-dark-mb-bimg) {
+  background-image: url(/images/bg-mobile-dark.jpg);
+}
+
+@media (min-width: 375px) {
+
+  .xsm\:bg-light-bimg {
+    background-image: url(/images/bg-desktop-light.jpg);
+  }
+
+  :is(.dark .xsm\:dark\:bg-dark-bimg) {
+    background-image: url(/images/bg-desktop-dark.jpg);
+  }
 }
 
