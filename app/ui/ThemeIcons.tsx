@@ -1,12 +1,12 @@
 import Image from 'next/image'
+import Sun from '../../public/images/icon-sun.svg'
+import Moon from '../../public/images/icon-moon.svg'
 
 function MoonIcon() {
     return (
         <Image
-            src='/images/icon-moon.svg'
+            src={Moon}
             alt='dark theme'
-            width={200}
-            height={200}
         />
     )
 }
@@ -14,10 +14,8 @@ function MoonIcon() {
 function SunIcon() {
     return (
         <Image
-            src='/images/icon-sun.svg'
+            src={Sun}
             alt='light theme'
-            width={200}
-            height={200}
         />
     )
 }
