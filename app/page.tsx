@@ -1,35 +1,36 @@
 import clientPromise from "./lib/mongodb"
+import Header from "./components/Header"
+import TodoInput from "./components/TodoInput"
 
 async function read() {
-  'use server'
+    'use server'
 
-  try {
-    const client = await clientPromise
-    const db = client.db("sample_mflix")
+    try {
+        const client = await clientPromise
+        const db = client.db("sample_mflix")
 
-    const movie = await db
-      .collection("movies")
-      .findOne({ "title": "The Great Train Robbery" })
+        const movie = await db
+            .collection("movies")
+            .findOne({ "title": "The Great Train Robbery" })
 
-    return {
-      props: { movie: JSON.parse(JSON.stringify(movie)) }
+        return {
+            props: { movie: JSON.parse(JSON.stringify(movie)) }
+        }
+
+    } catch (e) {
+        console.error(e)
     }
-
-  } catch (e) {
-    console.error(e)
-  }
 }
 
 export default async function Home() {
 
-  const movieData = await read()
+    const movieData = await read()
 
-
-  console.log('hi', movieData?.props.movie.title)
-
-  return (
-    <main>
-      <h1>{movieData?.props.movie.title}</h1>
-    </main>
-  )
+    return (
+        <div className=" xsm:container xsm:mx-auto mx-6 xsm:max-w-[33rem] xsm:w-5/6 py-2">
+            <Header />
+            <TodoInput /> 
+            <main></main>
+        </div>
+    )
 }

@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import {jose} from './ui/fonts'
+
 import Theme from './ui/themeProvider'
-import ThemeSwitch from "@/components/ThemeSwitch"
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -10,13 +11,12 @@ export const metadata: Metadata = {
 
 
 export default function RootLayout(
-  { children, }: { children: React.ReactNode }) {
+  { children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-        <body className='dark:bg-dark-mb-bimg xsm:dark:bg-dark-bimg bg-light-mb-bimg xsm:bg-light-bimg bg-no-repeat'>
+        <body className={`${jose.classname} antialiased dark:bg-dark-mb-bimg xsm:dark:bg-dark-bimg bg-light-mb-bimg xsm:bg-light-bimg bg-no-repeat`}>
         <Theme attribute='class' defaultTheme='system' enableSystem>
           {children}
-          <ThemeSwitch />
         </Theme>
       </body>
     </html>

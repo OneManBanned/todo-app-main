@@ -22,9 +22,9 @@ export default function ThemeSwitch() {
     const isActive = theme === "light";
 
     return (
-        <div onClick={toggleTheme}>
-            <button>
-                {isActive ? <SunIcon /> : <MoonIcon />}
+        <div onClick={toggleTheme} className='flex'>
+            <button className='w-5/6 items-center xsm:w-full'>
+                {isActive ? <MoonIcon /> : <SunIcon />}
             </button>
         </div>
     )
