@@ -8,19 +8,23 @@ const config: Config = {
     ],
     darkMode: 'class',
     theme: {
-        extend: {
-            screens: {
-                'xsm': '375px',
-            },
-            backgroundImage: {
-                'light-bimg': "url(/images/bg-desktop-light.jpg)",
-                'dark-bimg': "url(/images/bg-desktop-dark.jpg)",
-                'light-mb-bimg': "url(/images/bg-mobile-light.jpg)",
-                'dark-mb-bimg': "url(/images/bg-mobile-dark.jpg)",
-            },
-
+        colors: {
+            'dark': '#25273c',
+            'white': '#ffffff'
         },
+    extend: {
+        screens: {
+            'xsm': '375px',
+        },
+        backgroundImage: {
+            'light-bimg': "url(/images/bg-desktop-light.jpg)",
+            'dark-bimg': "url(/images/bg-desktop-dark.jpg)",
+            'light-mb-bimg': "url(/images/bg-mobile-light.jpg)",
+            'dark-mb-bimg': "url(/images/bg-mobile-dark.jpg)",
+        },
+
     },
+},
     plugins: [],
 }
 export default config
