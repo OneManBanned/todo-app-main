@@ -1,15 +1,22 @@
+import styles from '@/app/ui/textInput.module.css'
+
 export default function TodoInput() {
     return (
-        <div className="bg-white dark:bg-dark mt-11 py-3 rounded-md">
+        <div className="bg-white dark:bg-dark mt-11 xsm:py-4 py-3 rounded-md">
             <form className="flex">
-                <div className="basis-[4.5rem] flex justify-center items-center">
-                    <input type="checkbox" name="completed" id="completed" className="appearance-none peer" />
+                <div className={styles.checkbox_container}>
+                    <input
+                        type="checkbox"
+                        name="completed"
+                        id="completed"
+                        className={styles.checkbox_input}/>
                     <label
                         htmlFor="completed"
                         aria-label="completed"
-                        className="w-6 h-6 rounded-full border-2 border-{hsl(236, 33%, 92%)} peer-focus:bg-red-400"  />
+                        className={styles.checkbox_label}>
+                    </label>
                 </div>
-                <input className="w-5/6 me-3 font-normal outline-offset-4 text-sm dark:bg-dark" type="text" placeholder="Create a new todo..." />
+                <input className={styles.textInput} type="text" placeholder="Create a new todo..." />
             </form>
         </div>
     )
