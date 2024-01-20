@@ -10,11 +10,11 @@
 }
 
 .checkbox_input {
-    @apply appearance-none dark:bg-dark;
+@apply appearance-none ;
 }
 
 .checkbox_label {
-@apply w-6 h-6 rounded-full border-2 dark:border-dark-border 
+@apply w-6 h-6 rounded-full border-2  
     border-white-border hover:bg-gradient-to-br 
     hover:border-none hover:from-gradient-one 
     hover:to-gradient-two;
@@ -22,7 +22,7 @@
 } 	
 
 .checkbox_label:hover:after {
-    @apply dark:bg-dark bg-white;
+    @apply bg-white;
     position: absolute;
     content: '';
     border-radius: 50%;

@@ -660,6 +660,11 @@ body {
   }
 }
 
+:is(.dark .dark\:border-dark-border) {
+  --tw-border-opacity: 1;
+  border-color: rgb(77 80 102 / var(--tw-border-opacity));
+}
+
 :is(.dark .dark\:bg-dark) {
   --tw-bg-opacity: 1;
   background-color: rgb(37 39 60 / var(--tw-bg-opacity));
@@ -667,6 +672,12 @@ body {
 
 :is(.dark .dark\:bg-dark-mb-bimg) {
   background-image: url(/images/bg-mobile-dark.jpg);
+}
+
+:is(.dark .after\:hover\:dark\:bg-dark):hover::after {
+  content: var(--tw-content);
+  --tw-bg-opacity: 1;
+  background-color: rgb(37 39 60 / var(--tw-bg-opacity));
 }
 
 @media (min-width: 375px) {

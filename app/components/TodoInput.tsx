@@ -11,12 +11,12 @@ export default function TodoInput() {
                         id="completed"
                         className={styles.checkbox_input}/>
                     <label
-                        htmlFor="completed"
-                        aria-label="completed"
-                        className={styles.checkbox_label}>
+                    htmlFor="completed" 
+                    aria-label="completed" 
+                    className={`${styles.checkbox_label} after:hover:dark:bg-dark dark:border-dark-border`} >
                     </label>
                 </div>
-                <input className={styles.textInput} type="text" placeholder="Create a new todo..." />
+                <input className={`${styles.textInput} dark:bg-dark`} type="text" placeholder="Create a new todo..." />
             </form>
         </div>
     )

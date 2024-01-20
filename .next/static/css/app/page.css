@@ -44,11 +44,6 @@
             appearance: none;
 }
 
-:is(.textInput_dark__8hi1r .textInput_checkbox_input__hJywV) {
-    --tw-bg-opacity: 1;
-    background-color: rgb(37 39 60 / var(--tw-bg-opacity));
-}
-
 .textInput_checkbox_label__4bUAH {
     height: 1.5rem;
     width: 1.5rem;
@@ -67,11 +62,6 @@
     --tw-gradient-to: #c058f3 var(--tw-gradient-to-position);
 }
 
-:is(.textInput_dark__8hi1r .textInput_checkbox_label__4bUAH) {
-    --tw-border-opacity: 1;
-    border-color: rgb(77 80 102 / var(--tw-border-opacity));
-}
-
 .textInput_checkbox_label__4bUAH {
     position: relative;
 } 	
@@ -79,14 +69,6 @@
 .textInput_checkbox_label__4bUAH:hover:after {
     --tw-bg-opacity: 1;
     background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-} 	
-
-:is(.textInput_dark__8hi1r .textInput_checkbox_label__4bUAH:hover):after {
-    --tw-bg-opacity: 1;
-    background-color: rgb(37 39 60 / var(--tw-bg-opacity));
-} 	
-
-.textInput_checkbox_label__4bUAH:hover:after {
     position: absolute;
     content: '';
     border-radius: 50%;
