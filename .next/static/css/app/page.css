@@ -14,14 +14,6 @@
     outline-color: #3a7bfd;
 }
 
-:is(.textInput_dark__8hi1r .textInput_textInput__4qwMF) {
-    --tw-bg-opacity: 1;
-    background-color: rgb(37 39 60 / var(--tw-bg-opacity));
-    --tw-text-opacity: 1;
-    color: rgb(202 205 232 / var(--tw-text-opacity));
-    outline-color: #3a7bfd;
-}
-
 @media (min-width: 375px) {
 
     .textInput_textInput__4qwMF {
@@ -65,6 +57,7 @@
 .textInput_checkbox_label__4bUAH {
     position: relative;
 } 	
+
 
 .textInput_checkbox_label__4bUAH:hover:after {
     --tw-bg-opacity: 1;

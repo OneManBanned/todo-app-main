@@ -1,7 +1,6 @@
 .textInput {
 @apply w-5/6 me-3 font-normal outline-offset-4 caret-blue-splash outline-blue-splash 
-    dark:outline-blue-splash xsm:outline-offset-8 text-sm 
-    xsm:text-xl dark:bg-dark text-white-text dark:text-dark-text;
+     xsm:outline-offset-8 text-sm xsm:text-xl text-white-text ;
 }
 
 .checkbox_container {
@@ -15,11 +14,13 @@
 
 .checkbox_label {
 @apply w-6 h-6 rounded-full border-2  
-    border-white-border hover:bg-gradient-to-br 
+    border-white-border 
+    hover:bg-gradient-to-br 
     hover:border-none hover:from-gradient-one 
     hover:to-gradient-two;
     position: relative;
 } 	
+
 
 .checkbox_label:hover:after {
     @apply bg-white;
