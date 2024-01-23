@@ -24,7 +24,6 @@ async function read() {
 
 export default async function Home() {
 
-    const movieData = await read()
 
     return (
         <div className=" xsm:container xsm:mx-auto mx-6 xsm:max-w-[33rem] xsm:w-5/6 py-2">
