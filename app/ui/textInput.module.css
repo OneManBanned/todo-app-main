@@ -1,6 +1,5 @@
 .textInput {
-@apply w-5/6 me-3 font-normal outline-offset-4 caret-blue-splash outline-blue-splash 
-     xsm:outline-offset-8 text-sm xsm:text-xl text-white-text ;
+@apply w-5/6 me-3 font-normal  text-sm xsm:text-xl text-white-text outline-none caret-blue-splash;
 }
 
 .checkbox_container {
@@ -9,7 +8,8 @@
 }
 
 .checkbox_input {
-@apply appearance-none ;
+    appearance: none;
+    outline: none;
 }
 
 .checkbox_label {
@@ -21,9 +21,15 @@
     position: relative;
 } 	
 
+.checked {
+@apply bg-[url:theme("backgroundImage.check"),theme("backgroundImage.gradient-to-br")] bg-no-repeat bg-center;
+    cursor:pointer;
+}
+
 
 .checkbox_label:hover:after {
     @apply bg-white;
+    cursor: pointer;
     position: absolute;
     content: '';
     border-radius: 50%;
@@ -32,3 +38,4 @@
     margin: auto;
     aspect-ratio: 1;
 }
+

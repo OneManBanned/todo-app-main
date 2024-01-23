@@ -14,7 +14,8 @@ export default function RootLayout(
   { children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-        <body className={`${jose.classname} antialiased dark:bg-dark-mb-bimg xsm:dark:bg-dark-bimg bg-light-mb-bimg xsm:bg-light-bimg bg-no-repeat`}>
+        <body className={`${jose.className}
+        antialiased dark:bg-dark-mb-bimg xsm:dark:bg-dark-bimg bg-light-mb-bimg xsm:bg-light-bimg bg-no-repeat`}>
         <Theme attribute='class' defaultTheme='system' enableSystem>
           {children}
         </Theme>

@@ -1,4 +1,6 @@
 import type { Config } from 'tailwindcss'
+import plugin from 'tailwindcss/plugin'
+
 
 const config: Config = {
     content: [
@@ -28,10 +30,15 @@ const config: Config = {
                 'dark-bimg': "url(/images/bg-desktop-dark.jpg)",
                 'light-mb-bimg': "url(/images/bg-mobile-light.jpg)",
                 'dark-mb-bimg': "url(/images/bg-mobile-dark.jpg)",
+                'check': "url(/images/icon-check.svg)",
             },
 
         },
     },
-    plugins: [],
+    plugins: [
+     plugin(function({ addVariant }: any) {
+            addVariant('hocus', ['&:hover', '&:focus']) 
+        }),
+    ]
 }
 export default config
