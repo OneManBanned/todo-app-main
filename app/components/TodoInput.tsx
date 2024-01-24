@@ -17,18 +17,18 @@ export default function TodoInput() {
                         name="completed"
                         id="completed"
                         checked={isChecked}
-                        onClick={() => setIsChecked(prev => !prev)}
+                        onChange={() => setIsChecked(!isChecked)}
                         className={`${styles.checkbox_input} peer`} />
                     <label
                         htmlFor="completed"
                         aria-label="completed"
                         className={
                             isChecked
-                                ? `${styles.checkbox_label} peer-focus:bg-gradient-to-br peer-focus:border-none peer-focus:from-gradient-one 
+                                ? `${styles.checked} w-6 h-6 rounded-full to-gradient-two bg-check-mark border-2 border-none from-gradient-one`
+                                :`${styles.checkbox_label} peer-focus:bg-gradient-to-br peer-focus:border-none peer-focus:from-gradient-one 
                             peer-focus:after:w-5 peer-focus:to-gradient-two peer-focus:after:h-5 after:hover:dark:bg-dark 
                             dark:border-dark-border peer-focus:after:bg-white peer-focus:after:absolute peer-focus:after:dark:bg-dark 
-                            peer-focus:after:bg-white peer-focus:after:inset-0 peer-focus:after:m-auto peer-focus:after:rounded-full`
-                                : `${styles.checked} w-6 h-6 rounded-full to-gradient-two bg-check-mark border-2 border-none from-gradient-one`}></label>
+                            peer-focus:after:bg-white peer-focus:after:inset-0 peer-focus:after:m-auto peer-focus:after:rounded-full` }></label>
 
                 </div>
                 <input className={`${styles.textInput} dark:text-dark-text dark:bg-dark`} type="text" placeholder="Create a new todo..." name="todo" id="todo" />
