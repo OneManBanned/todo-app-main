@@ -14,7 +14,6 @@ async function registerUser(formData: FormData) {
         }
 
         const result = await myCol.insertOne({ name: fields.name, password: fields.password })
-        console.log(`A document was inserted`)
 
     } catch (e) {
 
