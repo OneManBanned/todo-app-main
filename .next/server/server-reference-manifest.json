@@ -2,13 +2,21 @@
   "node": {
     "a563a056ad7ed972368fd4b26fdefd61c5d48a9d": {
       "workers": {
-        "app/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5COem%5C%5Cbrendan%5C%5Cfrontend_mentor%5C%5Cintermediate%5C%5Ctodo-app-main%5C%5Capp%5C%5Clib%5C%5Cactions.ts%22%2C%5B%22createTodo%22%5D%5D%5D&__client_imported__=true!"
+        "app/not-found": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5COem%5C%5Cbrendan%5C%5Cfrontend_mentor%5C%5Cintermediate%5C%5Ctodo-app-main%5C%5Capp%5C%5Clib%5C%5Cactions.ts%22%2C%5B%22createTodo%22%2C%22authenticate%22%5D%5D%5D&__client_imported__=true!"
       },
       "layer": {
-        "app/page": "action-browser"
+        "app/not-found": "action-browser"
+      }
+    },
+    "f6af5f417e29682cdf206e01360d0916af251fe0": {
+      "workers": {
+        "app/not-found": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5COem%5C%5Cbrendan%5C%5Cfrontend_mentor%5C%5Cintermediate%5C%5Ctodo-app-main%5C%5Capp%5C%5Clib%5C%5Cactions.ts%22%2C%5B%22createTodo%22%2C%22authenticate%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/not-found": "action-browser"
       }
     }
   },
   "edge": {},
-  "encryptionKey": "w7hxPWoWePQvSKxednA9JXQxnXrxft5USMck8ngjvIQ="
+  "encryptionKey": "F8PK7XfjC0Y4uLa0g1NoEN0DqNM53uJ0564BhmqaPnE="
 }
