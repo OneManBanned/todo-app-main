@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import Header from "./components/Header"
 import TodoInput from "./components/TodoInput"
+import  SessionProvider  from '@/app/ui/SessionProvider'
+import {getServerSession} from 'next-auth'
 import './globals.css'
 import {jose} from './ui/fonts'
 
@@ -12,19 +14,24 @@ export const metadata: Metadata = {
 }
 
 
-export default function RootLayout(
+export default async function RootLayout(
   { children }: { children: React.ReactNode }) {
+
+const session = await getServerSession();
+
   return (
     <html lang="en">
         <body className={`${jose.className}
         antialiased dark:bg-dark-mb-bimg xsm:dark:bg-dark-bimg bg-light-mb-bimg xsm:bg-light-bimg bg-no-repeat`}>
         <Theme attribute='class' defaultTheme='system' enableSystem>
         <div className=" xsm:container xsm:mx-auto mx-6 xsm:max-w-[33rem] xsm:w-5/6 py-2">
+            <SessionProvider session={session}>
             <Header />
             <TodoInput /> 
             <main>
           {children}
             </main>
+          </SessionProvider>
         </div>
         </Theme>
       </body>
