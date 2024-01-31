@@ -1,8 +1,17 @@
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 import clientPromise from "@/app/lib/mongodb";
+import { NextAuthOptions } from "next-auth";
+import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
+import dbConnect from "@/app/lib/dbConnect";
+import User from "@/app/lib/models"
 
-export const authOptions = {
+export const authOptions: NextAuthOptions = {
+    adapter: MongoDBAdapter(clientPromise),
+    session: {
+        strategy: "jwt",
+    },
+    secret: process.env.NEXTAUTH_SECRET,
     providers: [
         CredentialsProvider({
             name: "Credentials",
@@ -12,28 +21,49 @@ export const authOptions = {
             },
             async authorize(credentials, req) {
 
-                    const client = await clientPromise
-                    const db = client.db("NextJsTodoApp")
+                dbConnect();
 
-                    let username = req.body?.username
+                if (credentials == null) return null;
 
-                    let user = await db
-                        .collection('users')
-                        .findOne({ name: username })
-                console.log(user)
+                try {
 
-                if (user) {
-                    console.log('logged in')
-                    return user
-                } else {
-                    console.log(null)
-                    return null
+                    const user = User.findOne({ name: credentials.username })
+
+                    if (user) {
+                        // bcrypt password
+console.log('user found')
+                        return user
+                    } else {
+                        throw new Error("user not found");
+                    }
+
+                } catch (e: any) {
+                    throw new Error(e);
                 }
             },
         })
-    ]
+    ],
+    callbacks: {
+        async jwt({ token, user }: any) {
+            if (user) {
+                token.user = {
+                    _id: user._id,
+                    name: user.name,
+                };
+            }
+            return token;
+        },
+        session: async ({ session, token }: any) => {
+            if (token) {
+                session.user = token.user;
+            }
+            return session;
+        },
+    },
 }
 
 export const handler = NextAuth(authOptions)
 
+
 export { handler as GET, handler as POST }
+
