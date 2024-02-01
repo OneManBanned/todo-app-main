@@ -1,7 +1,6 @@
 'use client'
 
 import ThemeSwitch from "./ThemeSwitch";
-import Link from "next/link";
 import { signIn, signOut, useSession } from 'next-auth/react'
 
 function AuthButton() {
@@ -10,7 +9,7 @@ function AuthButton() {
 if (session) {
 return <button onClick={() => signOut()}>Sign out</button>
     }
-    return <button onClick={() => signIn()}>Sign in</button>
+    return (<button onClick={() => signIn()}>Sign in</button>)
     
 }
 
