@@ -31,7 +31,7 @@ export const authOptions: NextAuthOptions = {
 
                     if (user) {
                         // bcrypt password
-console.log('user found')
+console.log('user found', user)
                         return user
                     } else {
                         throw new Error("user not found");

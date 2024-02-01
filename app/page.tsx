@@ -1,4 +1,4 @@
-
+import TodoInput from "./components/TodoInput"
 import { getServerSession } from "next-auth"
 
 
@@ -7,12 +7,15 @@ export default async function Home() {
     console.log('session', session)
 
     return (
-        <div>
-            getServerSession Result
-            {session?.user?.name
-                ? (<h2>{session?.user?.name}</h2>)
-                : (<h2>Not logged in</h2>)
-            }
-        </div>
+        <>
+            <TodoInput />
+            <main>
+                getServerSession Result
+                {session?.user?.name
+                    ? (<h2>{session?.user?.name}</h2>)
+                    : (<h2>Not logged in</h2>)
+                }
+            </main>
+        </>
     )
 }
