@@ -1,47 +1,11 @@
-import dbConnect from "../lib/dbConnect";
-import { hash } from 'bcrypt'
-import { z } from 'zod';
-import User from '@/app/lib/models'
+'use client' 
 
-const FormSchema = z.object({
-    name: z.string(),
-    password: z.string(),
-    passwordCheck: z.string(),
-});
+import { registerUser } from "../lib/user_actions"
 
-const CreateUser = FormSchema;
-
-async function registerUser(formData: FormData) {
-    'use server'
-
-    try {
-
-        dbConnect()
-
-        const { name, password, passwordCheck } = CreateUser.parse({
-            name: formData.get('name'),
-            password: formData.get('password'),
-            passwordCheck: formData.get('passwordCheck')
-        })
-
-
-        if (password !== passwordCheck) throw new Error('Passwords need to match')
-
-        hash(password, 10, async (err, hash: Promise) => {
-            if (!err) {
-                await User.create({ name: name, password: hash })
-            } else {
-                console.log(err)
-            }
-        })
-
-
-    } catch (err) {
-        console.log(err)
-    }
-}
 
 export default async function Register() {
+
+
 
     return (
         <form action={registerUser} className="flex flex-col gap-2 mx-auto max-w-md mt-10">
