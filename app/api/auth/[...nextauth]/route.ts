@@ -5,6 +5,7 @@ import { NextAuthOptions } from "next-auth";
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import dbConnect from "@/app/lib/dbConnect";
 import User from "@/app/lib/models"
+import bcrypt from 'bcrypt'
 
 export const authOptions: NextAuthOptions = {
     adapter: MongoDBAdapter(clientPromise),
@@ -27,18 +28,18 @@ export const authOptions: NextAuthOptions = {
 
                 try {
 
-                    const user = User.findOne({ name: credentials.username })
+                    const user = await User.findOne({ name: credentials.username })
 
-                    if (user) {
-                        // bcrypt password
-console.log('user found', user)
-                        return user
-                    } else {
-                        throw new Error("user not found");
-                    }
+                    if (!user) return null;
 
-                } catch (e: any) {
-                    throw new Error(e);
+                    const match = await bcrypt.compare(credentials.password, user.password)
+
+                    if (!match) return null;
+
+                    return user
+
+                } catch (e) {
+                    console.log(e)
                 }
             },
         })

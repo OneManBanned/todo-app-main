@@ -1,16 +1,22 @@
 'use client'
 
 import ThemeSwitch from "./ThemeSwitch";
+import Link from "next/link";
 import { signIn, signOut, useSession } from 'next-auth/react'
 
 function AuthButton() {
     const { data: session } = useSession();
 
-if (session) {
-return <button onClick={() => signOut()}>Sign out</button>
+    if (session) {
+        return <button onClick={() => signOut()}>Sign out</button>
     }
-    return (<button onClick={() => signIn()}>Sign in</button>)
-    
+    return (
+        <>
+            <button onClick={() => signIn()}>Sign in</button>
+            <Link href='/register/'>Register</Link>
+        </>
+    )
+
 }
 
 
@@ -19,7 +25,7 @@ export default function Header() {
         <header >
             <div className="absolute top-0 right-0">
                 <menu className="flex flex-row">
-                    <li><AuthButton/></li>
+                    <li><AuthButton /></li>
                 </menu>
             </div>
             <div className="flex flex-row justify-between">
