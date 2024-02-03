@@ -3,7 +3,7 @@
 import dbConnect from "../lib/dbConnect";
 import { redirect } from "next/navigation";
 import { z } from 'zod';
-import User from '@/app/lib/models';
+import User from '@/app/lib/userModel'
 import bcrypt from 'bcrypt'
 
 const FormSchema = z.object({
@@ -37,7 +37,7 @@ export async function registerUser(formData: FormData) {
             }
         })
 
-
+console.log('hi')
     } catch (err) {
         console.log(err)
     }

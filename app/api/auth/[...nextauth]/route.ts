@@ -4,7 +4,7 @@ import clientPromise from "@/app/lib/mongodb";
 import { NextAuthOptions } from "next-auth";
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import dbConnect from "@/app/lib/dbConnect";
-import User from "@/app/lib/models"
+import User from "@/app/lib/userModel"
 import bcrypt from 'bcrypt'
 
 export const authOptions: NextAuthOptions = {

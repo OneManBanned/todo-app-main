@@ -1,11 +1,8 @@
-'use client' 
+'use client'
 
 import { registerUser } from "../lib/user_actions"
 
-
 export default async function Register() {
-
-
 
     return (
         <form action={registerUser} className="flex flex-col gap-2 mx-auto max-w-md mt-10">

@@ -1,12 +1,11 @@
 'use server'
 
-import clientPromise from '@/app/lib/mongodb';
+import dbConnect from './dbConnect';
 import { z } from 'zod';
 
 
 
 const FormSchema = z.object({
-
     id: z.string(),
     completed: z.coerce.boolean(),
     todo: z.string(),
@@ -20,8 +19,7 @@ export async function createTodo(formData: FormData) {
     'use server';
 
     try {
-        const client = await clientPromise
-        const db = client.db("NextJsTodoApp")
+        dbConnect()
 
         const { completed, todo } = CreateTodo.parse({
             completed: formData.get('completed'),
@@ -36,6 +34,7 @@ export async function createTodo(formData: FormData) {
 
     } catch (e) {
 
+        console.log(e)
     }
 }
 
