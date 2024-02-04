@@ -1,24 +1,26 @@
 'use server'
 
 import dbConnect from './dbConnect';
+import Todo from '@/app/lib/todoModel'
 import { z } from 'zod';
-
-
+import { getServerSession } from "next-auth"
 
 const FormSchema = z.object({
     id: z.string(),
     completed: z.coerce.boolean(),
     todo: z.string(),
-    date: z.string()
 })
 
-const CreateTodo = FormSchema.omit({ id: true, date: true });
+const CreateTodo = FormSchema.omit({ id: true });
 
 export async function createTodo(formData: FormData) {
 
-    'use server';
+    const session = await getServerSession()
+
+    console.log(session)
 
     try {
+
         dbConnect()
 
         const { completed, todo } = CreateTodo.parse({
@@ -26,15 +28,12 @@ export async function createTodo(formData: FormData) {
             todo: formData.get('todo')
         })
 
-        const date = new Date().toISOString().split('T')[0];
-
-        await db
-            .collection('todos')
-            .insertOne({ completed: completed, todo: todo, date: date })
+        await Todo.create({ todo: todo, completed: completed})
 
     } catch (e) {
 
         console.log(e)
+
     }
 }
 

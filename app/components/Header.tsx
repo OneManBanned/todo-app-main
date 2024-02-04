@@ -29,7 +29,7 @@ export default function Header() {
                 </menu>
             </div>
             <div className="flex flex-row justify-between">
-                <h1 className="text-2xl font-bold tracking-[10px] text-white xsm:text-4xl tracking-[17px]">TODO</h1>
+                <h1 className="text-2xl font-bold tracking-[10px] text-white xsm:text-4xl tracking-[17px]"><Link href='/'>TODO</Link></h1>
                 <ThemeSwitch />
             </div>
         </header>
