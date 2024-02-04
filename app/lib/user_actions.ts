@@ -1,7 +1,7 @@
-'use server' 
+'use server'
 
 import dbConnect from "../lib/dbConnect";
-import { redirect } from "next/navigation";
+import {redirect} from "next/navigation";
 import { z } from 'zod';
 import User from '@/app/lib/userModel'
 import bcrypt from 'bcrypt'
@@ -16,6 +16,7 @@ const CreateUser = FormSchema;
 
 export async function registerUser(formData: FormData) {
 
+
     try {
 
         dbConnect()
@@ -26,22 +27,31 @@ export async function registerUser(formData: FormData) {
             passwordCheck: formData.get('passwordCheck')
         })
 
+        const user = await User.findOne({name: name});
 
+        // Check name is not already saved in database
+        if (user) throw new Error("User already exists")
+        // Check if passwords match
         if (password !== passwordCheck) throw new Error('Passwords need to match')
 
-        bcrypt.hash(password, 10, async (err: any, hash: any)  => {
+        bcrypt.hash(password, 10, async (err: any, hash: any) => {
+
             if (!err) {
+
                 await User.create({ name: name, password: hash })
+
             } else {
+
                 console.log(err)
             }
         })
 
-console.log('hi')
     } catch (err) {
+
         console.log(err)
+
     }
 
-    redirect('/')
+    redirect("/")
 
 }

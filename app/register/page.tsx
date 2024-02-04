@@ -2,6 +2,7 @@
 
 import { registerUser } from "../lib/user_actions"
 
+
 export default async function Register() {
 
     return (
