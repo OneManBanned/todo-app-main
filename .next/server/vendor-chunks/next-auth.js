@@ -866,6 +866,17 @@ eval("\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));
 
 /***/ }),
 
+/***/ "(action-browser)/./node_modules/next-auth/providers/credentials.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/next-auth/providers/credentials.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+eval("\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\nexports[\"default\"] = Credentials;\nfunction Credentials(options) {\n    return {\n        id: \"credentials\",\n        name: \"Credentials\",\n        type: \"credentials\",\n        credentials: {},\n        authorize: ()=>null,\n        options\n    };\n}\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKGFjdGlvbi1icm93c2VyKS8uL25vZGVfbW9kdWxlcy9uZXh0LWF1dGgvcHJvdmlkZXJzL2NyZWRlbnRpYWxzLmpzIiwibWFwcGluZ3MiOiJBQUFhO0FBRWJBLDhDQUE2QztJQUMzQ0csT0FBTztBQUNULENBQUMsRUFBQztBQUNGRCxrQkFBZSxHQUFHRztBQUVsQixTQUFTQSxZQUFZQyxPQUFPO0lBQzFCLE9BQU87UUFDTEMsSUFBSTtRQUNKQyxNQUFNO1FBQ05DLE1BQU07UUFDTkMsYUFBYSxDQUFDO1FBQ2RDLFdBQVcsSUFBTTtRQUNqQkw7SUFDRjtBQUNGIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vdG9kby1hcHAvLi9ub2RlX21vZHVsZXMvbmV4dC1hdXRoL3Byb3ZpZGVycy9jcmVkZW50aWFscy5qcz83NjM5Il0sInNvdXJjZXNDb250ZW50IjpbIlwidXNlIHN0cmljdFwiO1xuXG5PYmplY3QuZGVmaW5lUHJvcGVydHkoZXhwb3J0cywgXCJfX2VzTW9kdWxlXCIsIHtcbiAgdmFsdWU6IHRydWVcbn0pO1xuZXhwb3J0cy5kZWZhdWx0ID0gQ3JlZGVudGlhbHM7XG5cbmZ1bmN0aW9uIENyZWRlbnRpYWxzKG9wdGlvbnMpIHtcbiAgcmV0dXJuIHtcbiAgICBpZDogXCJjcmVkZW50aWFsc1wiLFxuICAgIG5hbWU6IFwiQ3JlZGVudGlhbHNcIixcbiAgICB0eXBlOiBcImNyZWRlbnRpYWxzXCIsXG4gICAgY3JlZGVudGlhbHM6IHt9LFxuICAgIGF1dGhvcml6ZTogKCkgPT4gbnVsbCxcbiAgICBvcHRpb25zXG4gIH07XG59Il0sIm5hbWVzIjpbIk9iamVjdCIsImRlZmluZVByb3BlcnR5IiwiZXhwb3J0cyIsInZhbHVlIiwiZGVmYXVsdCIsIkNyZWRlbnRpYWxzIiwib3B0aW9ucyIsImlkIiwibmFtZSIsInR5cGUiLCJjcmVkZW50aWFscyIsImF1dGhvcml6ZSJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///(action-browser)/./node_modules/next-auth/providers/credentials.js\n");
+
+/***/ }),
+
 /***/ "(rsc)/./node_modules/next-auth/providers/credentials.js":
 /*!*********************************************************!*\
   !*** ./node_modules/next-auth/providers/credentials.js ***!

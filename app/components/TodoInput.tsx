@@ -1,10 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import { useState } from 'react';
 import styles from '@/app/ui/textInput.module.css';
 import { createTodo } from '@/app/lib/todo_actions';
 
 export default function TodoInput() {
+
 
     const [isChecked, setIsChecked] = useState(false)
 
