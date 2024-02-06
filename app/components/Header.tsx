@@ -12,7 +12,7 @@ function AuthButton() {
     }
     return (
         <>
-            <button onClick={() => signIn()}>Sign in</button>
+            <button onClick={() => signIn("Credentials", {callbackUrl: '/'})}>Sign in</button>
             <Link href='/register/'>Register</Link>
         </>
     )

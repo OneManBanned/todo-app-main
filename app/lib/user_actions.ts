@@ -1,7 +1,6 @@
 'use server'
 
 import dbConnect from "../lib/dbConnect";
-import {redirect} from "next/navigation";
 import { z } from 'zod';
 import User from '@/app/lib/userModel'
 import bcrypt from 'bcrypt'
@@ -51,7 +50,5 @@ export async function registerUser(formData: FormData) {
         console.log(err)
 
     }
-
-    redirect("/")
 
 }
