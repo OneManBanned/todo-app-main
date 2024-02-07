@@ -3,7 +3,7 @@
 import dbConnect from "../lib/dbConnect";
 import User from "@/app/lib/userModel"
 
-export async function getTodos(userId: string) {
+export async function getTodos(userId: string | undefined) {
 
     dbConnect()
 
@@ -11,18 +11,22 @@ export async function getTodos(userId: string) {
 
         console.log("getTodos() called", userId)
 
-        const u = await User
+        const populatedUser = await User
             .findById(userId)
-            .populate( { path: "todos", },)
-            .transform((i) => console.log(i))
+            .populate({ path: "todos" })
 
+        console.log(populatedUser)
 
-        console.log(u)
+        if (populatedUser) {
+            return populatedUser;
+        }
 
     } catch (e) {
 
         console.log(e)
 
     }
+
+    return undefined
 
 }
