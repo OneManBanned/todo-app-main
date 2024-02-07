@@ -8,25 +8,14 @@ import { getTodos } from "./utils/getTodos";
 export default async function Home() {
 
     const session = await getServerSession(authOptions);
+    const databaseTodos = session ? await getTodos(session?.user.id) : [];
 
-    if (session) {
-
-
- getTodos(session.user.id);
-
-        console.log("Home() called")
-
-    }
+    console.log(session)
 
     return (
         <>
             <TodoInput />
             <main>
-                getServerSession Result
-                {session?.user?.name
-                    ? (<h2>{session?.user?.name}</h2>)
-                    : (<h2>Not logged in</h2>)
-                }
             </main>
         </>
     )
