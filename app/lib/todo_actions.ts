@@ -31,7 +31,10 @@ export async function createTodo(formData: FormData) {
             todo: formData.get('todo')
         })
 
-        const newTodo = await Todo.create({ todo: todo, completed: completed })
+        const newTodo = await Todo.create({
+            todo: todo,
+            completed: completed
+        })
 
         await User.findByIdAndUpdate(id,
             { $push: { todos: newTodo._id } },

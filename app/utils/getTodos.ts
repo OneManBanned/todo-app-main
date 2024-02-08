@@ -2,6 +2,7 @@
 
 import dbConnect from "../lib/dbConnect";
 import User from "@/app/lib/userModel"
+import Todo from "@/app/lib/todoModel"
 
 export async function getTodos(userId: string | undefined) {
 
@@ -13,9 +14,7 @@ export async function getTodos(userId: string | undefined) {
 
         const populatedUser = await User
             .findById(userId)
-            .populate({ path: "todos" })
-
-        console.log(populatedUser)
+            .populate({path: 'todos', model: Todo})
 
         if (populatedUser) {
             return populatedUser;

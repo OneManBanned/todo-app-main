@@ -10,8 +10,11 @@ export default async function Home() {
     const session = await getServerSession(authOptions);
     const databaseTodos = session ? await getTodos(session?.user.id) : [];
 
-    console.log(session)
-
+    {
+        session 
+            ? console.log("Home() called with session", '\n', databaseTodos)
+            : console.log("Home() called without session", '\n', databaseTodos)
+    }
     return (
         <>
             <TodoInput />
