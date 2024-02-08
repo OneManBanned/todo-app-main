@@ -13,8 +13,7 @@ const UserSchema = new mongoose.Schema(
             required: true
         },
         todos: [{
-            type: Schema.Types.ObjectId,
-            ref: "Todo"
+            type: Schema.Types.ObjectId, ref: "Todo"
         }]
     },
     { timestamps: true }
