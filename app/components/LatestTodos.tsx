@@ -1,15 +1,15 @@
 'use client'
+import { useSession } from "next-auth/react"
 
-export default function LatestTodos(props) {
+export default function LatestTodos() {
 
+    const session = useSession()
 
+    console.log(session)
 
     return (
         <ul>
 
-             {props.latestTodos && props.latestTodos.todos.map((todo: any, index: any) => {
-                return <li key={index}>{todo.todo}</li>
-            })}
         </ul>
     )
 }
