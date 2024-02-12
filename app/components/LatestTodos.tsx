@@ -1,28 +1,44 @@
 'use client'
 
-import { useSession } from "next-auth/react"
+import { getSession, useSession } from "next-auth/react"
 import { useEffect, useState } from 'react'
+
+async function authId() {
+    const session = await getSession()
+    return session;
+}
 
 export default function LatestTodos() {
 
-    const session = useSession()
-    const [message, setMessage] = useState([])
-    let idObj = session.data?.user.id
+    const session = authId()
+    const [sessionId, setSessionId] = useState('')
+    const [isLoading, setIsLoading] = useState(true)
+    const [todos, setTodos] = useState([])
 
-    if (session.status == 'authenticated') {
+    session
+    .then((res, rej) => {
+            if (res) {
 
-        useEffect(() => {
-             fetch(`http://localhost:3000/api/todos/${idObj}`)
+            setSessionId(res?.user.id)
+
+            fetch(`http://localhost:3000/api/todos/${sessionId}`)
                 .then(res => res.json())
-                .then(d => console.log("DATA", d))
-        }, [message])
+                .then(d => {
+                        console.log(typeof d.todos)
+                    })
+            } else if (rej) {
+                console.log('rejected')
+            }
+        })
 
-
-    }
 
     return (
         <ul>
-            <li></li>
+            <li>Hi</li>
         </ul>
     )
 }
+
+        /*
+
+*/
