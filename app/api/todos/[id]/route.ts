@@ -9,7 +9,6 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
 
     console.log("Called in GET", params )
 
-/*
     dbConnect()
 
     try {
@@ -26,7 +25,6 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
         console.log(e)
     }
 
-   */
 
     return NextResponse.json({"message": "hello"})
 
