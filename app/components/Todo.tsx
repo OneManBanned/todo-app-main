@@ -1,16 +1,26 @@
 'use client'
 
-import { useState } from 'react';
+import {useState} from 'react'
 import styles from '@/app/ui/textInput.module.css';
-import { createTodo } from '@/app/lib/todo_actions';
+import Image from 'next/image'
 
-export default function TodoInput() {
+function deleteTodo() { }
+function updateCompletedStatus() {}
 
-    const [isChecked, setIsChecked] = useState(false)
+interface TodoProps {
+    todo: string;
+    id: string;
+    completed: boolean;
+}
+
+export default function Todo(props: TodoProps) {
+
+    const {todo, id, completed} = props
+    const [isChecked, setIsChecked] = useState(completed)
 
     return (
-        <div className="bg-white dark:bg-dark mt-11 xsm:py-4 py-3 rounded-md">
-            <form action={createTodo} className="flex">
+        <li>
+            <form action={updateCompletedStatus} className="flex">
                 <div className={styles.checkbox_container}>
                     <input
                         type="checkbox"
@@ -31,13 +41,12 @@ export default function TodoInput() {
                             peer-focus:after:bg-white peer-focus:after:inset-0 peer-focus:after:m-auto peer-focus:after:rounded-full` }></label>
 
                 </div>
-                <input
-                    className={`${styles.textInput} dark:text-dark-text dark:bg-dark`}
-                    type="text" placeholder="Create a new todo..."
-                    name="todo"
-                    id="todo" />
-                <label htmlFor="todo" aria-label="Create a new todo"></label>
             </form>
-        </div>
+
+            {todo}
+            <button onClick={deleteTodo}>
+                <Image src="images/icon-cross.svg" width={25} height={25} alt="" />
+            </button>
+        </li>
     )
 }

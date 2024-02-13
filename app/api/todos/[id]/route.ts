@@ -7,8 +7,6 @@ export const dynamic = 'force-dynamic'
 
 export async function GET(req: NextRequest, { params }: { params: { id: string }}) {
 
-    console.log("Called in GET", params )
-
     dbConnect()
 
     try {
@@ -18,14 +16,14 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
             .populate({path: "todos", model: Todo})
             .select("todos")
 
-        console.log(populatedUser)
+        return NextResponse.json(
+            {"todos": populatedUser.todos}, 
+        )
         
     } catch(e) {
 
-        console.log(e)
+        console.log("THERE HAS BEEN AN ERROR", e)
+
     }
-
-
-    return NextResponse.json({"message": "hello"})
 
 }
