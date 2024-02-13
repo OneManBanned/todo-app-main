@@ -18,7 +18,7 @@ export default async function RootLayout(
     const session = await getServerSession();
 
     return (
-        <html lang="en">
+        <html lang="en" suppressHydrationWarning>
             <body className={`${jose.className}
         antialiased dark:bg-dark-mb-bimg xsm:dark:bg-dark-bimg bg-light-mb-bimg xsm:bg-light-bimg bg-no-repeat`}>
                 <Theme attribute='class' defaultTheme='system' enableSystem>

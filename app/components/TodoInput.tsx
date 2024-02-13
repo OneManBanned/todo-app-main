@@ -6,7 +6,6 @@ import { createTodo } from '@/app/lib/todo_actions';
 
 export default function TodoInput() {
 
-
     const [isChecked, setIsChecked] = useState(false)
 
     return (
