@@ -1,4 +1,4 @@
-'use client'
+'use client' 
 
 import { getSession } from "next-auth/react"
 import { useEffect, useState } from 'react'
@@ -35,10 +35,10 @@ export default function LatestTodos() {
     return (
         <ul>
             {todos.map((todo, index) => {
-                console.log("TODO",todo)
                 return <Todo 
+                    sessionId={sessionId}
                     todo={todo.todo} 
-                    id={todo._id} 
+                    todoId={todo._id} 
                     completed={todo.completed} 
                     key={index} 
                 />
