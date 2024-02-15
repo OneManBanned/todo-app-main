@@ -53,7 +53,7 @@ export async function createTodo(formData: FormData) {
 }
 
 export async function updateCompletedStatus(props) {
-
+    console.log("Hello, from inside updateCompetedStatus", '\n', props)
 }
 
 
