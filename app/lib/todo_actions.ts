@@ -52,8 +52,28 @@ export async function createTodo(formData: FormData) {
 
 }
 
-export async function updateCompletedStatus(props) {
-    console.log("Hello, from inside updateCompetedStatus", '\n', props)
+export async function updateCompletedStatus(params) {
+    console.log("Hello, from inside updateCompetedStatus", '\n')
+    dbConnect()
+
+    const [completed, todoId] = params
+
+    try {
+        
+       const updatedTodo = await Todo
+            .findOneAndUpdate(
+                {_id: todoId}, 
+                {completed: !completed}
+            )
+
+        console.log(updatedTodo)
+                    
+
+    } catch(e) {
+
+        console.log(e)
+
+    }
 }
 
 
