@@ -4,10 +4,9 @@ import dbConnect from './dbConnect';
 import Todo from '@/app/lib/todoModel';
 import User from '@/app/lib/userModel';
 import { z } from 'zod';
-import { revalidatePath } from 'next/cache';
-import { redirect } from 'next/navigation'
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../api/auth/[...nextauth]/route';
+import { revalidateTag } from 'next/cache'
 
 const FormSchema = z.object({
     id: z.string(),
@@ -50,30 +49,27 @@ export async function createTodo(formData: FormData) {
 
     }
 
+    revalidateTag('todos')
+
 }
 
 export async function updateCompletedStatus(params) {
-    console.log("Hello, from inside updateCompetedStatus", '\n')
+
     dbConnect()
 
     const [completed, todoId] = params
 
     try {
         
-       const updatedTodo = await Todo
-            .findOneAndUpdate(
-                {_id: todoId}, 
-                {completed: !completed}
-            )
-
-        console.log(updatedTodo)
-                    
+     await Todo.findOneAndUpdate( {_id: todoId}, {completed: !completed})
 
     } catch(e) {
 
         console.log(e)
 
     }
+    
+    revalidateTag('todos')
 }
 
 
@@ -85,20 +81,18 @@ export async function deleteTodo(params) {
 
     try {
 
-         await User.updateOne({_id: sessionId}, {
-            $pullAll: {
-                todos: [todoId],
-            },
+    await User.updateOne({_id: sessionId}, 
+            { $pullAll: { todos: [todoId], },
         })
 
-        const todo = await Todo.deleteOne({_id: todoId})
+     await Todo.deleteOne({_id: todoId})
 
     } catch(e) {
         
         console.log(e)
 
     }
-
-    console.log("HIT")
+    
+    revalidateTag('todos')
 
 }

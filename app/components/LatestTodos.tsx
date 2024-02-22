@@ -9,12 +9,13 @@ async function fetchSession() {
     return session;
 }
 
-export default function LatestTodos() {
+export default function LatestTodos(props) {
 
     const session = fetchSession()
     const [sessionId, setSessionId] = useState('')
     const [todos, setTodos] = useState([{ "todo": "hi", "_id": "sdfsdfd", "completed": true }])
 
+console.log(props)
     session
         .then(res => res ? setSessionId(res.user.id) : null)
         .catch((error) => console.log(error))
@@ -41,6 +42,7 @@ export default function LatestTodos() {
                     todo={todo.todo} 
                     todoId={todo._id} 
                     completed={todo.completed} 
+                    setTodos={setTodos}
                     key={index} 
                 />
             })}
