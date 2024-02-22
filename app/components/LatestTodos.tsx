@@ -33,6 +33,7 @@ export default function LatestTodos() {
 
 
     return (
+        <div className="mt-6">
         <ul>
             {todos.map((todo, index) => {
                 return <Todo 
@@ -44,6 +45,7 @@ export default function LatestTodos() {
                 />
             })}
         </ul>
+        </div>
     )
 }
 
