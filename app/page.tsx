@@ -12,7 +12,7 @@ export default async function Home() {
     const todosLatest = await res.json()
 
 
-
+if (!session) return <p>...pending</p>
 
         return (
         <>

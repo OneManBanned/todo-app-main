@@ -8,7 +8,6 @@ interface TodoProps {
     sessionId: string;
     todo: string;
     todoId: string;
-    setTodo: any[];
     completed: boolean;
 }
 
@@ -48,7 +47,7 @@ export default function Todo(props: TodoProps) {
             }>{todo}</p>
             <button
                 className="w-6 h-6 rounded-full mr-4"
-                onClick={() => { deleteTodoWithId({}) }}>
+                onClick={() =>  deleteTodoWithId({}) }>
                 <Image src="images/icon-cross.svg" width={18} height={18} alt="" />
             </button>
         </li>

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import styles from '@/app/ui/textInput.module.css';
 import { createTodo } from '@/app/lib/todo_actions';
 
@@ -8,9 +8,14 @@ export default function TodoInput() {
 
     const [isChecked, setIsChecked] = useState(false)
 
+    const ref = useRef<HTMLFormElement>(null)
+
     return (
         <div className="bg-white dark:bg-dark mt-11 xsm:py-4 py-3 rounded-md">
-            <form action={createTodo} className="flex">
+            <form ref={ref} action={async (formData) => {
+                await createTodo(formData)
+                ref.current?.reset()
+            } } className="flex">
                 <div className={styles.checkbox_container}>
                     <input
                         type="checkbox"

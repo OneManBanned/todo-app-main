@@ -1,48 +1,31 @@
 'use client' 
 
-import { getSession } from "next-auth/react"
-import { useEffect, useState } from 'react'
+import { useState } from 'react';
 import Todo from '@/app/components/Todo'
-
-async function fetchSession() {
-    const session = await getSession()
-    return session;
-}
 
 export default function LatestTodos(props) {
 
-    const session = fetchSession()
-    const [sessionId, setSessionId] = useState('')
     const [todos, setTodos] = useState([{ "todo": "hi", "_id": "sdfsdfd", "completed": true }])
 
-console.log(props)
-    session
-        .then(res => res ? setSessionId(res.user.id) : null)
-        .catch((error) => console.log(error))
 
-    useEffect(() => {
-
-        if (sessionId !== '') {
-
-            fetch(`http://localhost:3000/api/todos/${sessionId}`)
-                .then(res => res.json())
-                .then(data => setTodos(data.todos))
-                .catch(err => console.log(err))
-
-        }}, [sessionId])
-
+    function useTodos(databaseTodos, clientTodos) {
+        if (databaseTodos) {
+            return databaseTodos;
+        } 
+        return clientTodos;
+        
+    }
 
 
     return (
         <div className="mt-6">
         <ul>
-            {todos.map((todo, index) => {
+            {useTodos(props.todos.todos, todos).map((todo, index) => {
                 return <Todo 
-                    sessionId={sessionId}
+                    sessionId={props.sessionId}
                     todo={todo.todo} 
                     todoId={todo._id} 
                     completed={todo.completed} 
-                    setTodos={setTodos}
                     key={index} 
                 />
             })}
