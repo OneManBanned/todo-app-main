@@ -5,22 +5,22 @@ import { authOptions } from "./api/auth/[...nextauth]/route"
 
 export default async function Home() {
 
-    const session =  await getServerSession(authOptions)
+    const session = await getServerSession(authOptions)
 
+    const fetchDatabaseTodos = await fetch(
+        `http://localhost:3000/api/todos/${session?.user?.id}`,
+        { next: { tags: ['todos'] } }
+    )
 
-    const res = await fetch(`http://localhost:3000/api/todos/${session.user?.id}`, { next: { tags: ['todos']}})
-    const todosLatest = await res.json()
+    const { todos: databaseTodos } = await fetchDatabaseTodos.json()
 
-
-if (!session) return <p>...pending</p>
-
-        return (
+    return (
         <>
             <TodoInput />
             <main>
-                <LatestTodos 
-                    sessionId={session.user?.id}
-                    todos={todosLatest}
+                <LatestTodos
+                    sessionId={session ? session?.user?.id : null}
+                    databaseTodos={databaseTodos ? databaseTodos : null}
                 />
             </main>
         </>
