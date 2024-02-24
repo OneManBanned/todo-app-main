@@ -2,21 +2,12 @@
 
 import styles from '@/app/ui/textInput.module.css';
 import Image from 'next/image'
-import  { deleteTodo, updateCompletedStatus }  from '@/app/lib/todo_actions';
+import  { deleteTodo, updateCompletedStatus }  from '../lib/todo_actions';
 
-interface TodoProps {
-    sessionId: string;
-    todo: string;
-    todoId: string;
-    completed: boolean;
-}
+export default function Todo({sessionId, todo, todoId, completed}: TodoProps) {
 
-export default function Todo(props: TodoProps) {
-
-    const {sessionId, todo, todoId, completed} = props
     const deleteTodoWithId = deleteTodo.bind(null, [sessionId, todoId])
     const updateCompletedStatusWithId = updateCompletedStatus.bind(null,  [completed, todoId])
-
 
     return (
         <li className="bg-white dark:bg-dark xsm:py-4 py-3 flex first-of-type:rounded-t-md border-b-2 border-white-border dark:border-dark-border">
@@ -52,4 +43,11 @@ export default function Todo(props: TodoProps) {
             </button>
         </li>
     )
+}
+
+interface TodoProps {
+    sessionId?: string;
+    todo: string;
+    todoId: string;
+    completed: boolean;
 }

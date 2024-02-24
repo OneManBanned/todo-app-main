@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react';
 import styles from '@/app/ui/textInput.module.css';
-import { createTodo } from '@/app/lib/todo_actions';
+import { createTodo } from '../lib/todo_actions';
 
 export default function TodoInput() {
 
