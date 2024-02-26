@@ -1,53 +1,44 @@
-'use client' 
+'use client'
 
 import { useState, useEffect } from 'react';
-import Todo from '@/app/components/Todo'
+import Todo from '../components/Todo'
+import FilterFieldset from './FilterFieldset';
 
-export default function LatestTodos({databaseTodos, sessionId}) {
+export default function LatestTodos({ databaseTodos, sessionId }: DatabaseProps) {
 
-    const [userTodos, setUserTodos] = useState<[]>([])
+    const [userTodos, setUserTodos] = useState([])
     const [filter, setFilter] = useState("all")
 
     useEffect(() => {
-        if (databaseTodos) setUserTodos(databaseTodos)
+        if (databaseTodos) {
+            setUserTodos(databaseTodos.todos)
+        }
     }, [databaseTodos])
 
+    useEffect(() => {
+        let arr = databaseTodos ? databaseTodos.todos : []
+        setUserTodos(filterTodos(filter, arr))
+    }, [filter])
 
     return (
         <div className="mt-6">
-        <ul>
-            {filterTodos(filter, userTodos).map((todo, index) => {
-                return <Todo 
-                    sessionId={sessionId}
-                    todo={todo.todo} 
-                    todoId={todo._id} 
-                    completed={todo.completed} 
-                    key={index} />
-                })}
-        </ul>
-            <div>
-                <fieldset>
-                    <div>
-                        <input type="radio" id="all" onClick={(e) => setFilter(e.target.value)} name="todosFilter" value="all" defaultChecked />
-                        <label htmlFor="all">All</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="active" onClick={(e) => setFilter(e.target.value)} name="todosFilter" value="active" />
-                        <label htmlFor="active">Active</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="done" onClick={(e) => setFilter(e.target.value)} name="todosFilter" value="done" />
-                        <label htmlFor="done">Completed</label>
-                    </div>
-                </fieldset>
-            </div> 
+            {userTodos.length
+                ? <ul> {userTodos.map((todo: UserTodos, index: number) => {
+                        return <Todo 
+                            sessionId={sessionId}
+                            todo={todo.todo} todoId={todo._id} completed={todo.completed}
+                            key={index} /> })}
+                  </ul>
+                : <p>Enter a todo to start</p>
+            }
+            <FilterFieldset setFilter={setFilter} />
         </div>
     )
 }
 
-function filterTodos(filter, todoArr) {
+function filterTodos(filter: string, todoArr: UserTodos[]): any {
 
-  switch (filter) {
+    switch (filter) {
         case 'all': {
             return todoArr;
         }
@@ -58,5 +49,18 @@ function filterTodos(filter, todoArr) {
             return todoArr.filter(todo => todo.completed)
         }
     }
-
 }
+
+interface Todos { todos: [] }
+
+interface DatabaseProps {
+    databaseTodos: Todos | undefined;
+    sessionId: string | undefined;
+}
+
+interface UserTodos {
+    _id: string;
+    todo: string;
+    completed: boolean;
+}
+

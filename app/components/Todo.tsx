@@ -3,6 +3,7 @@
 import styles from '@/app/ui/textInput.module.css';
 import Image from 'next/image'
 import  { deleteTodo, updateCompletedStatus }  from '../lib/todo_actions';
+import { TodoProps } from '@/app/lib/interfaces'
 
 export default function Todo({sessionId, todo, todoId, completed}: TodoProps) {
 
@@ -45,9 +46,3 @@ export default function Todo({sessionId, todo, todoId, completed}: TodoProps) {
     )
 }
 
-interface TodoProps {
-    sessionId?: string;
-    todo: string;
-    todoId: string;
-    completed: boolean;
-}
