@@ -24,6 +24,7 @@ const config: Config = {
         extend: {
             screens: {
                 'xsm': '375px',
+                'mid': '575px'
             },
             backgroundImage: {
                 'light-bimg': "url(/images/bg-desktop-light.jpg)",

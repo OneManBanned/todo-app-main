@@ -3,7 +3,6 @@
 import styles from '@/app/ui/textInput.module.css';
 import Image from 'next/image'
 import  { deleteTodo, updateCompletedStatus }  from '../lib/todo_actions';
-import { TodoProps } from '@/app/lib/interfaces'
 
 export default function Todo({sessionId, todo, todoId, completed}: TodoProps) {
 
@@ -11,7 +10,9 @@ export default function Todo({sessionId, todo, todoId, completed}: TodoProps) {
     const updateCompletedStatusWithId = updateCompletedStatus.bind(null,  [completed, todoId])
 
     return (
-        <li className="bg-white dark:bg-dark xsm:py-4 py-3 flex first-of-type:rounded-t-md border-b-2 border-white-border dark:border-dark-border">
+        <li className="bg-white dark:bg-dark xsm:py-4 py-3 flex first-of-type:rounded-t-md border-b-2 border-white-border 
+            dark:border-dark-border cursor-pointer"
+        >
                 <div className={styles.checkbox_container}>
                     <input
                         type="checkbox"
@@ -25,7 +26,7 @@ export default function Todo({sessionId, todo, todoId, completed}: TodoProps) {
                         aria-label="completed"
                         className={
                             completed
-                                ? `${styles.checked} w-6 h-6 rounded-full to-gradient-two bg-check-mark border-2 border-none from-gradient-one`
+                                ? `${styles.checked} xsm:w-6 xsm:w-6 w-5 h-5 rounded-full to-gradient-two bg-check-mark border-2 border-none from-gradient-one`
                                 : `${styles.checkbox_label} peer-focus:bg-gradient-to-br peer-focus:border-none peer-focus:from-gradient-one 
                             peer-focus:after:w-5 peer-focus:to-gradient-two peer-focus:after:h-5 after:hover:dark:bg-dark 
                             dark:border-dark-border peer-focus:after:bg-white peer-focus:after:absolute peer-focus:after:dark:bg-dark 
@@ -34,15 +35,24 @@ export default function Todo({sessionId, todo, todoId, completed}: TodoProps) {
             </div>
             <p className={
                 completed 
-                    ? "w-5/6 me-3 font-normal text-sm xsm:text-xl line-through text-white-border dark:text-dark-border" 
-                    : `w-5/6 me-3 font-normal text-sm xsm:text-xl text-white-text dark:text-dark-text dark:bg-dark`
+                    ? "w-5/6 me-3 font-normal text-sm xsm:text-xl line-through text-white-border dark:text-dark-border mt-auto" 
+                    : `w-5/6 me-3 font-normal text-sm xsm:text-xl text-white-text dark:text-dark-text dark:bg-dark mt-auto`
             }>{todo}</p>
             <button
                 className="w-6 h-6 rounded-full mr-4"
                 onClick={() =>  deleteTodoWithId({}) }>
-                <Image src="images/icon-cross.svg" width={18} height={18} alt="" />
+                <div className="relative overflow-hidden w-3 h-3 xsm:w-5 xsm:h-5">
+                <Image src="images/icon-cross.svg" alt="" fill />
+                </div>
             </button>
         </li>
     )
 }
 
+interface TodoProps {
+    sessionId?: string;
+    todo: string;
+    todoId?: string;
+    _id?: string;
+    completed: boolean;
+}

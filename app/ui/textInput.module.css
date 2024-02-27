@@ -1,9 +1,9 @@
 .textInput {
-@apply w-5/6 me-3 font-normal text-sm xsm:text-xl text-white-text outline-none caret-blue-splash;
+    @apply w-5/6 me-3 font-normal text-sm xsm:text-xl text-white-text outline-none caret-blue-splash;
 }
 
 .checkbox_container {
-@apply basis-[4.5rem] flex justify-center items-center;
+    @apply basis-[4.5rem] flex justify-center items-center;
 
 }
 
@@ -13,7 +13,7 @@
 }
 
 .checkbox_label {
-@apply w-6 h-6 rounded-full border-2  
+    @apply xsm:w-6 xsm:h-6 w-5 h-5 rounded-full border-2  
     border-white-border 
     hover:bg-gradient-to-br 
     hover:border-none hover:from-gradient-one 
@@ -22,7 +22,7 @@
 } 	
 
 .checked {
-@apply bg-[url:theme("backgroundImage.check"),theme("backgroundImage.gradient-to-br")] bg-no-repeat bg-center;
+    @apply xsm:w-6 xsm:h-6 w-5 h-5 bg-[url:theme("backgroundImage.check"),theme("backgroundImage.gradient-to-br")] bg-no-repeat bg-center;
     cursor:pointer;
 }
 
@@ -39,3 +39,10 @@
     aspect-ratio: 1;
 }
 
+.filter_labels {
+    @apply cursor-pointer xsm:text-base;
+}
+
+.filter_labels:hover {
+    @apply text-dark;
+}
