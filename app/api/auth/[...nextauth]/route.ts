@@ -7,7 +7,7 @@ import dbConnect from "@/app/lib/dbConnect";
 import User from "@/app/lib/userModel"
 import bcrypt from 'bcrypt'
 
-export const authOptions: NextAuthOptions = {
+const authOptions: NextAuthOptions = {
     adapter: MongoDBAdapter(clientPromise),
     session: {
         strategy: "jwt",
@@ -59,7 +59,5 @@ export const authOptions: NextAuthOptions = {
 }
 
 export const handler = NextAuth(authOptions)
-
-
 export { handler as GET, handler as POST }
 
