@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth/next"
 import TodoInput from "./components/TodoInput"
 import LatestTodos from "./components/LatestTodos"
-import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+import { authOptions } from "@/app/lib/auth"
 
 export default async function Home() {
 
