@@ -53,11 +53,11 @@ export async function createTodo(formData: FormData) {
 
 }
 
-export async function updateCompletedStatus({completed, todoId}
-    : {completed: boolean, todoId: string}) {
+export async function updateCompletedStatus(params: any) {
 
     dbConnect()
 
+    const [completed, todoId] = params
 
     try {
 
@@ -73,9 +73,9 @@ export async function updateCompletedStatus({completed, todoId}
 }
 
 
-export async function deleteTodo( {sessionId, todoId}:
-    {sessionId: string, todoId: string}) {
+export async function deleteTodo(params: any) {
 
+    const [sessionId, todoId] = params
 
     dbConnect()
 
