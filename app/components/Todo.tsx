@@ -6,8 +6,8 @@ import  { deleteTodo, updateCompletedStatus }  from '../lib/todo_actions';
 
 export default function Todo({sessionId, todo, todoId, completed}: TodoProps) {
 
-    const deleteTodoWithId = deleteTodo.bind(null, [sessionId, todoId])
-    const updateCompletedStatusWithId = updateCompletedStatus.bind(null,  [completed, todoId])
+    const deleteTodoWithId: any = deleteTodo.bind(null, [sessionId, todoId])
+    const updateCompletedStatusWithId: any = updateCompletedStatus.bind(null,  [completed, todoId])
 
     return (
         <li className="bg-white dark:bg-dark xsm:py-4 py-3 flex first-of-type:rounded-t-md border-b-2 border-white-border 
