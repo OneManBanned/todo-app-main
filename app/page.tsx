@@ -2,6 +2,32 @@ import { getServerSession } from "next-auth/next"
 import TodoInput from "./components/TodoInput"
 import LatestTodos from "./components/LatestTodos"
 import { authOptions } from "@/app/lib/auth"
+import dbConnect from "./lib/dbConnect"
+import User from "@/app/lib/userModel"
+import Todo from "@/app/lib/todoModel"
+
+
+async function getTodos(sessionId: string) {
+
+    dbConnect()
+
+    try {
+
+        const populatedUser = await User
+            .findById(sessionId)
+            .populate({ path: "todos", model: Todo })
+            .select("todos")
+
+
+        return JSON.stringify(populatedUser);
+
+
+    } catch (e) {
+
+        console.log("THERE HAS BEEN AN ERROR", e)
+
+    }
+}
 
 export default async function Home() {
 
@@ -9,14 +35,8 @@ export default async function Home() {
     let databaseTodos;
 
     if (session) {
-
-        const fetchDatabaseTodos = await fetch(
-            `${process.env.VERCEL_URL}/api/todos/${session.user?.id}`,
-            { next: { tags: ['todos'] } }
-        )
-
-        databaseTodos = await fetchDatabaseTodos.json()
-
+        const response = await getTodos(session?.user.id)
+        databaseTodos = response ? JSON.parse(response) : response;
     }
 
     return (

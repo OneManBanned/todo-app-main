@@ -14,6 +14,7 @@ export default function LatestTodos({ databaseTodos, sessionId }: DatabaseProps)
         setUserTodos(filterTodos(filter, arr))
     }, [filter, databaseTodos])
 
+
     return (
         <>
             <div className="mt-6">

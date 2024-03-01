@@ -49,7 +49,7 @@ export async function createTodo(formData: FormData) {
 
     }
 
-    revalidateTag('todos')
+    revalidateTag('')
 
 }
 
@@ -69,7 +69,7 @@ export async function updateCompletedStatus(params: any) {
 
     }
 
-    revalidateTag('todos')
+    revalidateTag('')
 }
 
 
@@ -94,6 +94,6 @@ export async function deleteTodo(params: any) {
 
     }
 
-    revalidateTag('todos')
+    revalidateTag('')
 
 }
