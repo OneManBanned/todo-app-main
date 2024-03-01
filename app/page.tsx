@@ -11,7 +11,7 @@ export default async function Home() {
     if (session) {
 
         const fetchDatabaseTodos = await fetch(
-            `${process.env.NEXT_PUBLIC_URL}/api/todos/${session.user?.id}`,
+            `${process.env.VERCEL_URL}/api/todos/${session.user?.id}`,
             { next: { tags: ['todos'] } }
         )
 
