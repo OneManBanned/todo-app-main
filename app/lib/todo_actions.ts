@@ -6,7 +6,7 @@ import User from '@/app/lib/userModel';
 import { z } from 'zod';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/lib/auth';
-import { revalidateTag } from 'next/cache'
+import { revalidatePath } from 'next/cache'
 
 const FormSchema = z.object({
     id: z.string(),
@@ -49,7 +49,7 @@ export async function createTodo(formData: FormData) {
 
     }
 
-    revalidateTag('')
+    revalidatePath('/', 'layout')
 
 }
 
@@ -69,7 +69,7 @@ export async function updateCompletedStatus(params: any) {
 
     }
 
-    revalidateTag('')
+        revalidatePath('/', 'layout')
 }
 
 
@@ -94,6 +94,6 @@ export async function deleteTodo(params: any) {
 
     }
 
-    revalidateTag('')
+        revalidatePath('/', 'layout')
 
 }

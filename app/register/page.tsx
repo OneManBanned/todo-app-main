@@ -1,8 +1,6 @@
-@@ -1,19 +0,0 @@
 'use client'
 
 import { registerUser } from "../lib/user_actions"
-
 
 export default async function Register() {
 
@@ -18,3 +16,4 @@ export default async function Register() {
         </form>
     )
 }
+
