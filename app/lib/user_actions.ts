@@ -4,6 +4,7 @@ import dbConnect from "../lib/dbConnect";
 import { z } from 'zod';
 import User from '@/app/lib/userModel'
 import bcrypt from 'bcrypt'
+import { redirect } from 'next/navigation'
 
 const FormSchema = z.object({
     name: z.string(),
@@ -13,8 +14,11 @@ const FormSchema = z.object({
 
 const CreateUser = FormSchema;
 
-export async function registerUser(formData: FormData) {
+export async function registerUser(prevState: any, formData: FormData) {
 
+    return {
+        message: 'Please enter a valid email'
+    }
 
     try {
 
@@ -26,29 +30,28 @@ export async function registerUser(formData: FormData) {
             passwordCheck: formData.get('passwordCheck')
         })
 
-        const user = await User.findOne({name: name});
+        const user = await User.findOne({ name: name });
 
-        // Check name is not already saved in database
-        if (user) throw new Error("User already exists")
-        // Check if passwords match
-        if (password !== passwordCheck) throw new Error('Passwords need to match')
+        if (user) {
+            throw new Error("User already exists")
+        }
+        if (password !== passwordCheck) {
+            throw new Error('Passwords need to match')
+        }
 
         bcrypt.hash(password, 10, async (err: any, hash: any) => {
 
-            if (!err) {
+            await User.create({ name: name, password: hash })
+            console.log('USER CREATED', err )
 
-                await User.create({ name: name, password: hash })
-
-            } else {
-
-                console.log(err)
-            }
         })
 
     } catch (err) {
 
-        console.log(err)
+        throw new Error('Failed to create user')
 
     }
+
+        redirect('api/auth/signin')
 
 }
