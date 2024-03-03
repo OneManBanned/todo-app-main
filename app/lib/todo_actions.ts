@@ -49,7 +49,7 @@ export async function createTodo(formData: FormData) {
 
     }
 
-    revalidatePath('/', 'layout')
+    revalidatePath('/', 'page')
 
 }
 
@@ -69,7 +69,7 @@ export async function updateCompletedStatus(params: any) {
 
     }
 
-        revalidatePath('/', 'layout')
+        revalidatePath('/', 'page')
 }
 
 
@@ -94,6 +94,6 @@ export async function deleteTodo(params: any) {
 
     }
 
-        revalidatePath('/', 'layout')
+        revalidatePath('/', 'page')
 
 }

@@ -7,43 +7,64 @@ import bcrypt from 'bcrypt'
 import { redirect } from 'next/navigation'
 
 const FormSchema = z.object({
-    name: z.string(),
-    password: z.string(),
-    passwordCheck: z.string(),
+    name: z
+    .string()
+    .min(1, {message:"Name is required"}),
+    password: z
+    .string()
+    .min(1, {message:"Password is required"}),
+    passwordCheck: z
+    .string()
+    .min(1, {message:"Please re-enter your password"}),
 });
+
+export type State = {
+    errors?: {
+        name?: string[];
+        password?: string[];
+        passwordCheck?: string[];
+    }
+    message?: string | null
+}
 
 const CreateUser = FormSchema;
 
-export async function registerUser(prevState: any, formData: FormData) {
-
-    return {
-        message: 'Please enter a valid email'
-    }
+export async function registerUser(prevState: State, formData: FormData) {
 
     try {
 
         dbConnect()
 
-        const { name, password, passwordCheck } = CreateUser.parse({
+        const validatedFields = CreateUser.safeParse({
             name: formData.get('name'),
             password: formData.get('password'),
             passwordCheck: formData.get('passwordCheck')
         })
 
+        if (!validatedFields.success) {
+            return {
+                errors: validatedFields.error.flatten().fieldErrors,
+                message: 'Missing fields. Failed to Create user',
+            }
+        }
+
+        const { name, password, passwordCheck } = validatedFields.data
+
         const user = await User.findOne({ name: name });
 
         if (user) {
-            throw new Error("User already exists")
+            return {
+                message: 'User already exists'
+            }
         }
         if (password !== passwordCheck) {
-            throw new Error('Passwords need to match')
+            return {
+                message: 'passwords must match'
+            }
         }
 
         bcrypt.hash(password, 10, async (err: any, hash: any) => {
-
             await User.create({ name: name, password: hash })
-            console.log('USER CREATED', err )
-
         })
 
     } catch (err) {
@@ -52,6 +73,6 @@ export async function registerUser(prevState: any, formData: FormData) {
 
     }
 
-        redirect('api/auth/signin')
+    redirect('api/auth/signin')
 
 }

@@ -13,6 +13,7 @@ const config: Config = {
         colors: {
             'dark': '#25273c',
             'white': '#ffffff',
+            'red': '#ff0000',
             'white-border': '#e4e5f1',
             'dark-border': '#4d5066',
             'white-text': '#484b6a',
