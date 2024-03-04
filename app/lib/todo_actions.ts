@@ -126,10 +126,6 @@ export async function deleteCompletedUserTodos(params: any) {
             $pullAll: { todos:  result  }
         })
 
-
-
-        console.log('ACTION HIT', '\n', populatedUser, '\n', result, '\n', ...result)
-
     } catch (e) {
 
         console.log(e)
@@ -139,9 +135,3 @@ export async function deleteCompletedUserTodos(params: any) {
     revalidatePath('/', 'page')
 
 }
-
-/*
-        await User.updateOne({_id: sessionId}, {
-            $pullAll: { todos: { _id: [...result] } }
-        })
-*/
