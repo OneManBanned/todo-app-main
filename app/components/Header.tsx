@@ -8,12 +8,12 @@ function AuthButton() {
     const { data: session } = useSession();
 
     if (session) {
-        return <button onClick={() => signOut()}>Sign out</button>
+        return <button className="text-dark dark:text-white mr-4" onClick={() => signOut()}>Sign out</button>
     }
     return (
         <>
-            <button onClick={() => signIn("Credentials", {callbackUrl: '/'})}>Sign in</button>
-            <Link href='/register/'>Register</Link>
+            <button className="text-dark dark:text-white mr-4" onClick={() => signIn("Credentials", {callbackUrl: '/'})}>Sign in</button>
+            <Link className="text-dark dark:text-white mr-4" href='/register/'>Register</Link>
         </>
     )
 

@@ -69,7 +69,7 @@ export async function updateCompletedStatus(params: any) {
 
     }
 
-        revalidatePath('/', 'page')
+    revalidatePath('/', 'page')
 }
 
 
@@ -94,6 +94,54 @@ export async function deleteTodo(params: any) {
 
     }
 
-        revalidatePath('/', 'page')
+    revalidatePath('/', 'page')
 
 }
+
+export async function deleteCompletedUserTodos(params: any) {
+
+    const [sessionId] = params
+
+    dbConnect()
+
+    try {
+
+        const populatedUser = await User.findById(sessionId)
+            .populate({
+                path: "todos",
+                select: "todos",
+                model: Todo,
+                match: { completed: true }
+            })
+
+
+        await Todo.deleteMany({
+            _id: { $in: populatedUser.todos }
+
+        })
+
+        let result = populatedUser.todos.map((todo: any) => todo._id )
+
+        await User.updateOne({_id: sessionId}, {
+            $pullAll: { todos:  result  }
+        })
+
+
+
+        console.log('ACTION HIT', '\n', populatedUser, '\n', result, '\n', ...result)
+
+    } catch (e) {
+
+        console.log(e)
+
+    }
+
+    revalidatePath('/', 'page')
+
+}
+
+/*
+        await User.updateOne({_id: sessionId}, {
+            $pullAll: { todos: { _id: [...result] } }
+        })
+*/

@@ -14,9 +14,9 @@ export default function Register() {
 
     return (
         <form action={dispatch} className="flex flex-col gap-2 mx-auto max-w-md mt-10">
-            <label htmlFor="name">Enter username</label>
+            <label className="text-dark dark:text-white" htmlFor="name">Enter username</label>
             <input
-                className="border border-black"
+                className="border border-black text-dark dark:text-white"
                 type="name"
                 name="name"
                 id="name"
@@ -30,9 +30,9 @@ export default function Register() {
                         </p>
                     ))}
             </div>
-            <label htmlFor="password">Enter password</label>
+            <label className="text-dark dark:text-white" htmlFor="password">Enter password</label>
             <input
-                className="border border-black"
+                className="border border-black text-dark dark:text-white"
                 type="password"
                 name="password"
                 id="password"
@@ -46,9 +46,9 @@ export default function Register() {
                         </p>
                     ))}
             </div>
-            <label htmlFor="passwordCheck">Re-enter password</label>
+            <label className="text-dark dark:text-white" htmlFor="passwordCheck">Re-enter password</label>
             <input
-                className="border border-black"
+                className="border border-black text-dark dark:text-white"
                 type="password"
                 name="passwordCheck"
                 id="passwordCheck"
@@ -65,7 +65,7 @@ export default function Register() {
             <div id="error" aria-live="polite" aria-atomic="true">
                 {state.message && <p className="mt-2 text-sm text-red" > {state.message} </p> }
             </div>
-            <button>Register</button>
+            <button className="text-dark dark:text-white">Register</button>
         </form>
     )
 }
