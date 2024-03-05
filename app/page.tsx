@@ -1,5 +1,6 @@
 import { getServerSession } from "next-auth/next"
-import TodoInput from "./components/TodoInput"
+import TodoDatabaseInput from "./components/TodoDatabaseInput"
+import TodoLocalInput from "./components/TodoLocalInput"
 import LatestTodos from "./components/LatestTodos"
 import { authOptions } from "@/app/lib/auth"
 import dbConnect from "./lib/dbConnect"
@@ -41,7 +42,10 @@ export default async function Home() {
 
     return (
         <>
-            <TodoInput />
+            {session?.user?.id 
+                ? <TodoDatabaseInput />
+                : <TodoLocalInput />
+            }
             <main>
                 <LatestTodos
                     sessionId={session?.user?.id}

@@ -7,29 +7,33 @@ import { deleteCompletedUserTodos } from '../lib/todo_actions';
 
 export default function LatestTodos({ databaseTodos, sessionId }: DatabaseProps) {
 
+    // userIsSignedIn ? databaseTodos : localTodos
     const [userTodos, setUserTodos] = useState([])
+
+    // filter todos by "all" | "active" | "done" 
     const [filter, setFilter] = useState("all")
 
     const deleteCompletedTodos: any = deleteCompletedUserTodos.bind(null, [sessionId])
 
     useEffect(() => {
-        let arr = databaseTodos ? databaseTodos.todos : []
-        setUserTodos(filterTodos(filter, arr))
+
+        if (databaseTodos) setUserTodos(filterTodos(filter, databaseTodos.todos))
+        else setUserTodos(filterTodos(filter, []))
+
     }, [filter, databaseTodos])
+
+    if (!userTodos.length) return <p>Enter a todo</p>
 
     return (
         <>
             <div className="mt-6">
-                {userTodos.length
-                    ? <ul> {userTodos.map((todo: UserTodos, index: number) => {
-                        return <Todo
-                            sessionId={sessionId}
-                            todo={todo.todo} todoId={todo._id} completed={todo.completed}
-                            key={index} />
-                    })}
-                    </ul>
-                    : <p>Enter a todo to start</p>
-                }
+                <ul> {userTodos.map((todo: UserTodos, index: number) => {
+                    return <Todo
+                        sessionId={sessionId}
+                        todo={todo.todo} todoId={todo._id} completed={todo.completed}
+                        key={index} />
+                })}
+                </ul>
             </div>
             <div className="flex mid:flex-nowrap flex-wrap">
                 <p className='mid:order-first rounded-l-md mid:rounded-bl-md mid: rounded-tl-none mb-6 mid:m-0 bg-white dark:bg-dark shrink
@@ -49,6 +53,7 @@ export default function LatestTodos({ databaseTodos, sessionId }: DatabaseProps)
                 </button>
             </div>
         </>
+
     )
 }
 
@@ -67,7 +72,7 @@ function filterTodos(filter: string, todoArr: UserTodos[]): any {
     }
 }
 
-interface Todos { todos: [] }
+interface Todos { todos: UserTodos[] }
 
 interface DatabaseProps {
     databaseTodos: Todos | undefined;

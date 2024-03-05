@@ -1,3 +1,10 @@
+
+Todo -
+
+client side todo storage and CRUD.
+Input validation, max length.
+
+
 # Frontend Mentor - Todo app
 
 

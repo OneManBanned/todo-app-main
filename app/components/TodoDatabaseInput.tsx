@@ -4,7 +4,7 @@ import { useState, useRef } from 'react';
 import styles from '@/app/ui/textInput.module.css';
 import { createTodo } from '../lib/todo_actions';
 
-export default function TodoInput() {
+export default function TodoDatabaseInput() {
 
     const [isChecked, setIsChecked] = useState(false)
 
