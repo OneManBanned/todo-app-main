@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import styles from '@/app/ui/textInput.module.css';
 
 export default function TodoLocalInput() {
@@ -27,7 +27,7 @@ export default function TodoLocalInput() {
         })
     }
 
-    function handleFormSubmit(e: React.SyntheticEvent) {
+     function handleFormSubmit(e: React.SyntheticEvent) {
 
         e.preventDefault();
 
@@ -39,20 +39,8 @@ export default function TodoLocalInput() {
             storedArr.todos.push(localTodo)
             localStorage.setItem('localTodos', JSON.stringify(storedArr))
 
-        } else {
-            localStorage.setItem('localTodos', '{ "todos": []}')
-
-            storedTodos = localStorage.getItem('localTodos')
-
-            if (storedTodos) {
-                let storedArr = JSON.parse(storedTodos)
-                storedArr.todos.push(localTodo)
-                localStorage.setItem('localTodos', JSON.stringify(storedArr))
-            }
         }
-
     }
-
 
     const [localTodo, setLocalTodo] = useState({ todo: '', completed: false })
 

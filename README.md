@@ -3,6 +3,7 @@ Todo -
 
 client side todo storage and CRUD.
 Input validation, max length.
+If filtered for a value that == 0 filter option disappears
 
 
 # Frontend Mentor - Todo app

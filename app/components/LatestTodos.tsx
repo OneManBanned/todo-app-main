@@ -7,6 +7,7 @@ import { deleteCompletedUserTodos } from '../lib/todo_actions';
 
 export default function LatestTodos({ databaseTodos, sessionId }: DatabaseProps) {
 
+
     // userIsSignedIn ? databaseTodos : localTodos
     const [userTodos, setUserTodos] = useState([])
 
@@ -17,10 +18,39 @@ export default function LatestTodos({ databaseTodos, sessionId }: DatabaseProps)
 
     useEffect(() => {
 
-        if (databaseTodos) setUserTodos(filterTodos(filter, databaseTodos.todos))
-        else setUserTodos(filterTodos(filter, []))
+        if (databaseTodos) {
+            setUserTodos(filterTodos(filter, databaseTodos.todos))
+        }
 
     }, [filter, databaseTodos])
+
+    useEffect(() => {
+
+        if (!databaseTodos) {
+
+            let localTodos: any = localStorage.getItem("localTodos")
+
+            if (localTodos == null) {
+
+                localStorage.setItem("localTodos", '{"todos":[]}')
+                localTodos = localStorage.getItem("localTodos")
+
+                if (localTodos) {
+                    localTodos = JSON.parse(localTodos)
+                    setUserTodos(filterTodos(filter, localTodos.todos))
+                }
+
+            } else {
+
+                localTodos = JSON.parse(localTodos)
+                setUserTodos(filterTodos(filter, localTodos.todos))
+      
+        }
+    }
+
+
+    }, [filter] )
+
 
     if (!userTodos.length) return <p>Enter a todo</p>
 
