@@ -1,6 +1,4 @@
 import { getServerSession } from "next-auth/next"
-import TodoDatabaseInput from "./components/TodoDatabaseInput"
-import TodoLocalInput from "./components/TodoLocalInput"
 import LatestTodos from "./components/LatestTodos"
 import { authOptions } from "@/app/lib/auth"
 import dbConnect from "./lib/dbConnect"
@@ -19,9 +17,7 @@ async function getTodos(sessionId: string) {
             .populate({ path: "todos", model: Todo })
             .select("todos")
 
-
         return JSON.stringify(populatedUser);
-
 
     } catch (e) {
 
@@ -42,10 +38,6 @@ export default async function Home() {
 
     return (
         <>
-            {session?.user?.id 
-                ? <TodoDatabaseInput />
-                : <TodoLocalInput />
-            }
             <main>
                 <LatestTodos
                     sessionId={session?.user?.id}

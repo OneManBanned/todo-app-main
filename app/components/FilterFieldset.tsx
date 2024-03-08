@@ -1,7 +1,7 @@
 import { SetStateAction } from "react"
 import styles from '@/app/ui/textInput.module.css'
 
-export default function FilterFieldset({ filter, setFilter }:
+export default function FilterFieLdset({ filter, setFilter }:
     { filter: string, setFilter: React.Dispatch<SetStateAction<string>> }) {
 
     return (
