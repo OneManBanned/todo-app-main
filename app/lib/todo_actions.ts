@@ -98,7 +98,7 @@ export async function deleteTodo(params: any) {
 
 }
 
-export async function deleteCompletedUserTodos(params: any) {
+export async function deleteCompletedDatabaseTodos(params: any) {
 
     const [sessionId] = params
 

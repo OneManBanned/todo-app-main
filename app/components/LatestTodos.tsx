@@ -1,52 +1,52 @@
 'use client'
 
 import { useState, useEffect } from 'react';
+import { UserTodos, Todos } from "../lib/types";
+import { fetchLocalStorageTodos } from '../ui/fetchLocalStorageTodos';
+import TodoDatabaseInput from './TodoDatabaseInput';
+import TodoLocalInput from './TodoLocalInput';
 import Todo from '../components/Todo'
+import DeleteAllBtn from './DeleteAllBtn';
 import FilterFieldset from './FilterFieldset';
-import { deleteCompletedUserTodos } from '../lib/todo_actions';
 
 export default function LatestTodos({ databaseTodos, sessionId }: DatabaseProps) {
 
-    const [userTodos, setUserTodos] = useState([])
+    // userIsSignedIn ? databaseTodos : localTodos
+    const [userTodos, setUserTodos] = useState<UserTodos[]>([])
+
+    // filter todos by "all" | "active" | "done" 
     const [filter, setFilter] = useState("all")
 
-    const deleteCompletedTodos: any = deleteCompletedUserTodos.bind(null, [sessionId])
-
     useEffect(() => {
-        let arr = databaseTodos ? databaseTodos.todos : []
-        setUserTodos(filterTodos(filter, arr))
+        databaseTodos
+            ? setUserTodos(filterTodos(filter, databaseTodos.todos))
+            : setUserTodos(filterTodos(filter, fetchLocalStorageTodos().todos))
     }, [filter, databaseTodos])
 
     return (
         <>
-            <div className="mt-6">
+            {sessionId ? <TodoDatabaseInput /> : <TodoLocalInput setUserTodos={setUserTodos} />}
+
+            <div>
                 {userTodos.length
-                    ? <ul> {userTodos.map((todo: UserTodos, index: number) => {
-                        return <Todo
-                            sessionId={sessionId}
-                            todo={todo.todo} todoId={todo._id} completed={todo.completed}
-                            key={index} />
-                    })}
-                    </ul>
-                    : <p>Enter a todo to start</p>
-                }
-            </div>
-            <div className="flex mid:flex-nowrap flex-wrap">
-                <p className='mid:order-first rounded-l-md mid:rounded-bl-md mid: rounded-tl-none mb-6 mid:m-0 bg-white dark:bg-dark shrink
+                    ? <div className="mt-6">
+                        <ul> {userTodos.map((todo: UserTodos, index: number) => {
+                            return <Todo sessionId={sessionId} setUserTodos={setUserTodos}
+                                todoId={todo._id} todo={todo.todo} completed={todo.completed} key={index} />
+                        })}
+                        </ul>
+                    </div>
+                    : <p className="mt-6">Enter a Todo</p>}
+                <div className="flex mid:flex-nowrap flex-wrap">
+                    <p className='mid:order-first rounded-l-md mid:rounded-bl-md mid: rounded-tl-none mb-6 mid:m-0 bg-white dark:bg-dark shrink
                    font-normal text-sm xsm:text-base mt-auto flex text-[#9394a5] items-center dark:text-dark-border py-4 ps-4'>
-                    {userTodos.length == 1
-                        ? `${userTodos.length} item left`
-                        : `${userTodos.length} items left`}
-                </p>
-                <FilterFieldset
-                    filter={filter}
-                    setFilter={setFilter} />
-                <button
-                    onClick={() => deleteCompletedTodos({})}
-                    className='mid:order-last rounded-r-md mid:rounded-br-md mid: rounded-tr-none mid:m-0 mb-6 bg-white dark:bg-dark grow text-right 
-                    mid:grow-0 shrink font-normal xsm:text-base text-sm text-[#9394a5] dark:text-dark-border py-4 pe-4'>
-                    Clear Completed
-                </button>
+                        {userTodos.length == 1
+                            ? `${userTodos.length} item left`
+                            : `${userTodos.length} items left`}
+                    </p>
+                    <FilterFieldset filter={filter} setFilter={setFilter} />
+                    <DeleteAllBtn sessionId={sessionId} setUserTodos={setUserTodos}/>
+                </div>
             </div>
         </>
     )
@@ -67,16 +67,8 @@ function filterTodos(filter: string, todoArr: UserTodos[]): any {
     }
 }
 
-interface Todos { todos: [] }
-
 interface DatabaseProps {
     databaseTodos: Todos | undefined;
     sessionId: string | undefined;
-}
-
-interface UserTodos {
-    _id: string;
-    todo: string;
-    completed: boolean;
 }
 
