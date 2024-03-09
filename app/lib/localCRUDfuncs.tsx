@@ -78,4 +78,3 @@ export function deleteCompletedLocalTodos(setLocalTodos: Dispatch<SetStateAction
             `{"todos": ${JSON.stringify(todos.filter(t => !t.completed))}}`)
     }
 }
-
