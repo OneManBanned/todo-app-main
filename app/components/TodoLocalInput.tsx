@@ -1,8 +1,7 @@
 import { SetStateAction } from "react"
-import { UserTodos, Todos } from "../lib/types";
-import { v4 as uuidv4 } from "uuid";
+import { UserTodos } from "../lib/types";
+import { createLocalTodo } from "../lib/localCRUDfuncs";
 import { useState, useRef } from 'react';
-import { fetchLocalStorageTodos } from '../ui/fetchLocalStorageTodos';
 import styles from '@/app/ui/textInput.module.css';
 
 export default function TodoLocalInput({ setUserTodos }:
@@ -28,23 +27,6 @@ export default function TodoLocalInput({ setUserTodos }:
         })
     }
 
-    function handleFormSubmit(e: React.SyntheticEvent) {
-
-        e.preventDefault();
-
-        newTodo._id = uuidv4();
-        setUserTodos(prev => [...prev, newTodo])
-        let storedTodos: Todos = fetchLocalStorageTodos()
-
-        if (storedTodos == null) {
-            return
-        } else {
-            const { todos } = storedTodos
-            todos.push(newTodo)
-            localStorage.setItem("localTodos", `{"todos": ${JSON.stringify(todos)}}`)
-        }
-    }
-
     const [newTodo, setNewTodo] = useState({ _id: '', todo: '', completed: false })
 
     const ref = useRef<HTMLFormElement>(null)
@@ -52,7 +34,7 @@ export default function TodoLocalInput({ setUserTodos }:
     return (
         <div className="bg-white dark:bg-dark mt-11 xsm:py-4 py-3 rounded-md">
             <form ref={ref} className="flex"
-                onSubmit={(e) => { handleFormSubmit(e) }} >
+                onSubmit={(e) => { createLocalTodo(e, setUserTodos, newTodo) }} >
                 <div className={styles.checkbox_container}>
                     <input type="checkbox" name="completed" id="completed"
                         checked={newTodo.completed} onChange={(e) => handleCompletedStatus(e)}

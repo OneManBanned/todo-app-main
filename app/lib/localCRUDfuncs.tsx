@@ -1,6 +1,24 @@
+import { v4 as uuid } from "uuid";
 import { SetStateAction } from "react"
 import { fetchLocalStorageTodos } from "../ui/fetchLocalStorageTodos"
 import { Todos, UserTodos } from "../lib/types";
+
+export function createLocalTodo(e: React.SyntheticEvent, setLocalTodos: React.Dispatch<SetStateAction<UserTodos[]>>, todo: UserTodos) {
+
+    e.preventDefault();
+
+    todo._id = uuid();
+    setLocalTodos(prev => [...prev, todo])
+    let storedTodos: Todos = fetchLocalStorageTodos()
+
+    if (storedTodos == null) {
+        return
+    } else {
+        const { todos } = storedTodos
+        todos.push(todo)
+        localStorage.setItem("localTodos", `{"todos": ${JSON.stringify(todos)}}`)
+    }
+}
 
 export function deleteLocalTodo(setLocalTodos: React.Dispatch<SetStateAction<UserTodos[]>>, id: string) {
 
@@ -55,7 +73,8 @@ export function deleteCompletedLocalTodos(setLocalTodos: React.Dispatch<SetState
     } else {
 
         const { todos } = storedTodos
-            localStorage.setItem("localTodos",
+        localStorage.setItem("localTodos",
             `{"todos": ${JSON.stringify(todos.filter(t => !t.completed))}}`)
     }
 }
+
