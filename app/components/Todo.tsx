@@ -50,9 +50,8 @@ export default function Todo({ setUserTodos, sessionId, todo, todoId, completed 
 
 interface TodoProps {
     setUserTodos: React.Dispatch<SetStateAction<UserTodos[]>>;
-    sessionId: string;
+    sessionId: string | undefined;
     todo: string;
     todoId: string;
-    _id: string;
     completed: boolean;
 }
