@@ -4,6 +4,7 @@ import dbConnect from "../lib/dbConnect";
 import { z } from 'zod';
 import User from '@/app/lib/userModel'
 import bcrypt from 'bcrypt'
+import { revalidatePath } from "next/cache";
 import { redirect } from 'next/navigation'
 
 const FormSchema = z.object({
@@ -73,6 +74,7 @@ export async function registerUser(prevState: State, formData: FormData) {
 
     }
 
+    revalidatePath('/', 'page')
     redirect('api/auth/signin')
 
 }
