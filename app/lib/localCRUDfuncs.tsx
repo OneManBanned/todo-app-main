@@ -1,14 +1,15 @@
 import { v4 as uuid } from "uuid";
-import { SetStateAction } from "react"
+import { SetStateAction, Dispatch, SyntheticEvent } from "react"
 import { fetchLocalStorageTodos } from "../ui/fetchLocalStorageTodos"
 import { Todos, UserTodos } from "../lib/types";
 
-export function createLocalTodo(e: React.SyntheticEvent, setLocalTodos: React.Dispatch<SetStateAction<UserTodos[]>>, todo: UserTodos) {
+export function createLocalTodo(e: SyntheticEvent, setLocalTodos: React.Dispatch<SetStateAction<UserTodos[]>>, todo: UserTodos) {
 
     e.preventDefault();
 
     todo._id = uuid();
     setLocalTodos(prev => [...prev, todo])
+
     let storedTodos: Todos = fetchLocalStorageTodos()
 
     if (storedTodos == null) {
@@ -20,9 +21,9 @@ export function createLocalTodo(e: React.SyntheticEvent, setLocalTodos: React.Di
     }
 }
 
-export function deleteLocalTodo(setLocalTodos: React.Dispatch<SetStateAction<UserTodos[]>>, id: string) {
+export function deleteLocalTodo(setLocalTodos: Dispatch<SetStateAction<UserTodos[]>>, id: string) {
 
-    setLocalTodos((prev: UserTodos[]) => prev.filter((t: UserTodos) => t._id !== id))
+    setLocalTodos((prev) => prev.filter((t) => t._id !== id))
 
     let storedTodos: Todos = fetchLocalStorageTodos()
 
@@ -36,9 +37,9 @@ export function deleteLocalTodo(setLocalTodos: React.Dispatch<SetStateAction<Use
     }
 }
 
-export function updateLocalCompleteStatus(setLocalTodos: React.Dispatch<SetStateAction<UserTodos[]>>, id: string) {
+export function updateLocalCompleteStatus(setLocalTodos: Dispatch<SetStateAction<UserTodos[]>>, id: string) {
 
-    setLocalTodos((prev: UserTodos[]) => prev.map((t: UserTodos) =>
+    setLocalTodos((prev) => prev.map((t) =>
         t._id === id
             ? { ...t, completed: !t.completed }
             : t
@@ -62,9 +63,9 @@ export function updateLocalCompleteStatus(setLocalTodos: React.Dispatch<SetState
 
 }
 
-export function deleteCompletedLocalTodos(setLocalTodos: React.Dispatch<SetStateAction<UserTodos[]>>) {
+export function deleteCompletedLocalTodos(setLocalTodos: Dispatch<SetStateAction<UserTodos[]>>) {
 
-    setLocalTodos((prev: UserTodos[]) => prev.filter((t: UserTodos) => !t.completed))
+    setLocalTodos((prev) => prev.filter((t) => !t.completed))
 
     let storedTodos: Todos = fetchLocalStorageTodos()
 
