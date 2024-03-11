@@ -1,43 +1,28 @@
-import { SetStateAction } from "react"
+import { SetStateAction, Dispatch} from "react"
 import { UserTodos } from "../lib/types";
-import { createLocalTodo } from "../lib/localCRUDfuncs";
+import { createLocalTodo, handleCompletedStatus, handleTextInput } from "../lib/localCRUDfuncs";
 import { useState, useRef } from 'react';
 import styles from '@/app/ui/textInput.module.css';
 
 export default function TodoLocalInput({ setUserTodos }:
-    { setUserTodos: React.Dispatch<SetStateAction<UserTodos[]>> }) {
+    { setUserTodos: Dispatch<SetStateAction<UserTodos[]>> }) {
 
-    function handleCompletedStatus(e: React.ChangeEvent<HTMLInputElement>) {
+    const initialValue = { _id: '', todo: '', completed: false };
 
-        setNewTodo(prev => {
-            return {
-                ...prev,
-                [e.target.name]: !prev.completed
-            }
-        })
-    }
-
-    function handleTextInput(e: React.ChangeEvent<HTMLInputElement>) {
-
-        setNewTodo(prev => {
-            return {
-                ...prev,
-                [e.target.name]: e.target.value
-            }
-        })
-    }
-
-    const [newTodo, setNewTodo] = useState({ _id: '', todo: '', completed: false })
+    const [newTodo, setNewTodo] = useState(initialValue)
 
     const ref = useRef<HTMLFormElement>(null)
 
     return (
         <div className="bg-white dark:bg-dark mt-11 xsm:py-4 py-3 rounded-md">
             <form ref={ref} className="flex"
-                onSubmit={(e) => { createLocalTodo(e, setUserTodos, newTodo) }} >
+                onSubmit={(e) => { 
+                    createLocalTodo(e, setUserTodos, newTodo);
+                    setNewTodo(initialValue);
+                    ref.current?.reset() }} >
                 <div className={styles.checkbox_container}>
-                    <input type="checkbox" name="completed" id="completed"
-                        checked={newTodo.completed} onChange={(e) => handleCompletedStatus(e)}
+                    <input type="checkbox" name="completed" id="completed" checked={newTodo.completed} 
+                        onChange={(e) => handleCompletedStatus(e, setNewTodo)}
                         className={`${styles.checkbox_input} peer`} />
                     <label htmlFor="completed" aria-label="completed"
                         className={
@@ -54,8 +39,9 @@ export default function TodoLocalInput({ setUserTodos }:
                 </div>
                 <input type="text" name="todo" id="todo"
                     className={`${styles.textInput} dark:text-dark-text dark:bg-dark`}
-                    onChange={(e) => handleTextInput(e)}
+                    onChange={(e) => handleTextInput(e, setNewTodo)}
                     placeholder="Create a new todo..."
+                    required
                 />
                 <label htmlFor="todo" aria-label="Create a new todo"></label>
             </form>

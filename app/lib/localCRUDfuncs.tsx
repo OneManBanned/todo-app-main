@@ -1,5 +1,5 @@
 import { v4 as uuid } from "uuid";
-import { SetStateAction, Dispatch, SyntheticEvent } from "react"
+import { SetStateAction, ChangeEvent, Dispatch, SyntheticEvent } from "react"
 import { fetchLocalStorageTodos } from "../ui/fetchLocalStorageTodos"
 import { Todos, UserTodos } from "../lib/types";
 
@@ -77,4 +77,24 @@ export function deleteCompletedLocalTodos(setLocalTodos: Dispatch<SetStateAction
         localStorage.setItem("localTodos",
             `{"todos": ${JSON.stringify(todos.filter(t => !t.completed))}}`)
     }
+}
+
+export function handleCompletedStatus(e: ChangeEvent<HTMLInputElement>, setter: Dispatch<SetStateAction<UserTodos>> ) {
+
+    setter(prev => {
+        return {
+            ...prev,
+            [e.target.name]: !prev.completed
+        }
+    })
+}
+
+export function handleTextInput(e: ChangeEvent<HTMLInputElement>, setter: Dispatch<SetStateAction<UserTodos>>) {
+
+    setter(prev => {
+        return {
+            ...prev,
+            [e.target.name]: e.target.value
+        }
+    })
 }

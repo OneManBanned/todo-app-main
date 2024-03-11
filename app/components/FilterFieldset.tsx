@@ -11,7 +11,7 @@ export default function FilterFieLdset({ filter, setFilter }:
                  py-3 mid:py-5 justify-evenly px-6 mid:px-6 xsm:px-10">
                 <div>
                     <input
-                        className="appearance-none"
+                        className={styles.checkbox_input}
                         type="radio" id="all" value="all"
                         defaultChecked name="todosFilter"
                         onClick={(e) => setFilter(e.currentTarget.value)} />
@@ -23,7 +23,7 @@ export default function FilterFieLdset({ filter, setFilter }:
                 </div>
                 <div>
                     <input type="radio" id="active"
-                        className="appearance-none"
+                        className={styles.checkbox_input}
                         name="todosFilter" value="active"
                         onClick={(e: any) => setFilter(e.currentTarget.value)} />
                     <label
@@ -34,7 +34,7 @@ export default function FilterFieLdset({ filter, setFilter }:
                 </div>
                 <div>
                     <input type="radio" id="done"
-                        className="appearance-none"
+                        className={styles.checkbox_input}
                         name="todosFilter" value="done"
                         onClick={(e: any) => setFilter(e.currentTarget.value)} />
                     <label
