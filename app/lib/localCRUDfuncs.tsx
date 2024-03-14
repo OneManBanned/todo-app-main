@@ -3,7 +3,7 @@ import { SetStateAction, ChangeEvent, Dispatch, SyntheticEvent } from "react"
 import { fetchLocalStorageTodos } from "../ui/fetchLocalStorageTodos"
 import { Todos, UserTodos } from "../lib/types";
 
-export function createLocalTodo(e: SyntheticEvent, setLocalTodos: React.Dispatch<SetStateAction<UserTodos[]>>, todo: UserTodos) {
+export function createLocalTodo(e: SyntheticEvent, setLocalTodos: Dispatch<SetStateAction<UserTodos[]>>, todo: UserTodos) {
 
     e.preventDefault();
 

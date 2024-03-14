@@ -1,14 +1,14 @@
-import { SetStateAction } from "react"
+import { SetStateAction, Dispatch } from "react"
 import styles from '@/app/ui/textInput.module.css'
 
 export default function FilterFieLdset({ filter, setFilter }:
-    { filter: string, setFilter: React.Dispatch<SetStateAction<string>> }) {
+    { filter: string, setFilter: Dispatch<SetStateAction<string>> }) {
 
     return (
-        <div className="order-last basis-full grow mid:basis-0">
+        <div className="order-last basis-full grow mid:basis-0 shadow-2xl xsm:shadow-none">
             <fieldset
                 className="rounded-md mid:rounded-none dark:bg-dark flex bg-white justify-center
-                 py-3 mid:py-5 justify-evenly px-6 mid:px-6 xsm:px-10">
+                 py-3 mid:py-5 justify-evenly px-6 mid:px-6 xsm:px-10 ">
                 <div>
                     <input
                         className={styles.checkbox_input}

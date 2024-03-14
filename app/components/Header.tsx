@@ -13,7 +13,7 @@ function AuthButton() {
     return (
         <>
             <button className="text-dark dark:text-white mr-4" onClick={() => signIn("Credentials", {callbackUrl: '/'})}>Sign in</button>
-            <Link className="text-dark dark:text-white mr-4" href='/register/'>Register</Link>
+            <Link className="text-dark dark:text-white mr-4" href='/register'>Register</Link>
         </>
     )
 
@@ -22,7 +22,7 @@ function AuthButton() {
 
 export default function Header() {
     return (
-        <header >
+        <header  className="mt-10 xsm:mt-16">
             <div className="absolute top-0 right-0">
                 <menu className="flex flex-row">
                     <li><AuthButton /></li>

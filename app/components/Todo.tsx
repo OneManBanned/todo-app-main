@@ -5,7 +5,9 @@ import Image from 'next/image'
 import TodoCheckbox from "./TodoCheckbox";
 import { deleteTodo } from '../lib/todo_actions';
 
-export default function Todo({ setUserTodos, sessionId, todo, todoId, completed }: TodoProps) {
+export default function Todo({ setUserTodos, sessionId, data }: TodoProps) {
+
+    const { completed, todo, _id: todoId} = data
 
     const [isHover, setIsHover] = useState(false)
     const [isFocus, setIsFocus] = useState(false)
@@ -14,7 +16,7 @@ export default function Todo({ setUserTodos, sessionId, todo, todoId, completed 
 
     return (
         <li className="bg-white dark:bg-dark xsm:py-4 py-3 flex first-of-type:rounded-t-md border-b-2 border-white-border 
-            dark:border-dark-border cursor-pointer"
+            dark:border-dark-border cursor-pointer" 
             onMouseEnter={() => setIsHover(true)}
             onMouseLeave={() => setIsHover(false)}
         >
@@ -41,10 +43,8 @@ export default function Todo({ setUserTodos, sessionId, todo, todoId, completed 
     )
 }
 
-interface TodoProps {
+type TodoProps = {
     setUserTodos: React.Dispatch<SetStateAction<UserTodos[]>>;
     sessionId: string | undefined;
-    todo: string;
-    todoId: string;
-    completed: boolean;
+    data: UserTodos
 }
